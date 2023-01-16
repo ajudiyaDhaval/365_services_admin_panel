@@ -91,7 +91,7 @@ class _AddServiceDialogWidgetState extends State<AddServiceDialogWidget> {
   @override
   void initState() {
     if (widget.service != null) {
-      _serviceNameController.text = widget.service!.serviceName;
+      _serviceNameController.text = widget.service!.serviceName??"";
     }
     super.initState();
   }

@@ -274,7 +274,7 @@ class OrderDetailsCard extends StatelessWidget {
                     style: _headingTextStyle,
                   ),
                   Text(
-                    orderModel.serviceModel.serviceName,
+                    orderModel.serviceModel.serviceName??"",
                     style: _contentTextStyle,
                   ),
                 ],

@@ -5,6 +5,7 @@ import 'package:service365_admin_panel/landing_screen/service_management/model/s
 import 'package:service365_admin_panel/landing_screen/service_management/repository/service_repository.dart';
 import 'package:service365_admin_panel/utility/image_picker.dart';
 import 'package:service365_admin_panel/utility/show_snak_bar.dart';
+
 part 'service_state.dart';
 
 class ServiceCubit extends Cubit<ServiceState> {
@@ -42,6 +43,35 @@ class ServiceCubit extends Cubit<ServiceState> {
     }
   }
 
+  Future<void> addPriceService({
+    required BuildContext context,
+    required ServiceModel serviceModel,
+    String? id,
+  }) async {
+    emit(ShowLoadingSpinner());
+    try {
+      await _serviceRepository.addPriceServiceToFirebase(
+        serviceModel: serviceModel,
+        id: id,
+      );
+      emit(ServiceInitial());
+      ShowSnackBar.showSnackBar(
+        context,
+        "'${serviceModel.serviceName}' successfully added to service",
+        textAlign: TextAlign.center,
+      );
+      return;
+    } catch (e) {
+      emit(ServiceInitial());
+      ShowSnackBar.showSnackBar(
+        context,
+        "Unable to add '${serviceModel.serviceName}' to service",
+        textAlign: TextAlign.center,
+      );
+      return;
+    }
+  }
+
   Future<void> editService({
     required BuildContext context,
     required ServiceModel service,
@@ -72,8 +102,7 @@ class ServiceCubit extends Cubit<ServiceState> {
     }
   }
 
-  Future<void> deleteService(
-      {required BuildContext context, required ServiceModel service}) async {
+  Future<void> deleteService({required BuildContext context, required ServiceModel service}) async {
     emit(ShowLoadingSpinner());
     try {
       await _serviceRepository.deleteServiceFromFirebase(

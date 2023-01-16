@@ -191,7 +191,7 @@ class _AddCityDialogWidgetState extends State<AddCityDialogWidget> {
                             children: [
                               Text(
                                 _cityModel!
-                                    .availableServices[index].serviceName,
+                                    .availableServices[index].serviceName ??"",
                                 style: _serviceTextFontStyle,
                               ),
                               IconButton(
@@ -322,7 +322,7 @@ class _AddCityDialogWidgetState extends State<AddCityDialogWidget> {
                                     _cityManagerCubit
                                         .availableServiceWithCheckList[index]
                                         .service
-                                        .serviceName,
+                                        .serviceName??"",
                                     style: _serviceTextFontStyle,
                                   ),
                                   value: _cityManagerCubit
