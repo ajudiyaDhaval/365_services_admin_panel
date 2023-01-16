@@ -3,15 +3,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ServiceModel {
   String? id;
   String? imageUrl;
-  String serviceName;
-  // FirstTimeService? firstTimeService;
-  // SecondTimeService? secondTimeService;
+  String? serviceName;
+  FirstTimeServiceModel? firstTimeServiceModel;
+  SecondTimeServiceModel? secondTimeServiceModel;
+
   ServiceModel({
     this.id,
     this.imageUrl,
-    required this.serviceName,
-    // this.firstTimeService,
-    // this.secondTimeService,
+    this.serviceName,
+    this.firstTimeServiceModel,
+    this.secondTimeServiceModel,
   });
 
   Map<String, dynamic> toMap() {
@@ -19,8 +20,8 @@ class ServiceModel {
       'id': id,
       'imageUrl': imageUrl,
       'serviceName': serviceName,
-      // 'firstTimeService': firstTimeService,
-      // 'secondTimeService': secondTimeService,
+      'firstTimeServiceModel': firstTimeServiceModel?.toMap(),
+      'secondTimeServiceModel': secondTimeServiceModel?.toMap(),
     };
   }
 
@@ -29,20 +30,25 @@ class ServiceModel {
       id: map['id'],
       imageUrl: map['imageUrl'],
       serviceName: map['serviceName'] ?? '',
-      // firstTimeService: map['firstTimeService'] ?? '',
-      // secondTimeService: map['secondTimeService'] ?? '',
+      firstTimeServiceModel:map['firstTimeServiceModel'] == null
+          ? null
+          : FirstTimeServiceModel.fromMap(map['firstTimeServiceModel']),
+        secondTimeServiceModel:map['secondTimeServiceModel'] == null
+          ? null
+          : SecondTimeServiceModel.fromMap(map['secondTimeServiceModel']),
     );
   }
 }
 
-class FirstTimeService {
+
+class FirstTimeServiceModel {
   String? bhk1;
   String? bhk2;
   String? bhk3;
   String? bhk4;
   String? bhk5;
 
-  FirstTimeService({
+  FirstTimeServiceModel({
     this.bhk1,
     this.bhk2,
     this.bhk3,
@@ -50,45 +56,32 @@ class FirstTimeService {
     this.bhk5,
   });
 
-  FirstTimeService.fromDocumentSnapshot(
-    DocumentSnapshot documentSnapshot,
-  ) {
-    Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
-    bhk1 = data['bhk1'] ?? '';
-    bhk2 = data['bhk2'] ?? '';
-    bhk3 = data['bhk3'] ?? '';
-    bhk4 = data['bhk4'] ?? '';
-    bhk5 = data['bhk5'] ?? '';
+  Map<String, dynamic> toMap() {
+    return {
+      "bhk1": bhk1,
+      "bhk2": bhk2,
+      "bhk3": bhk3,
+      "bhk4": bhk4,
+      "bhk5": bhk5,
+    };
   }
 
-  FirstTimeService.fromJson(Map<String, dynamic> json) {
-    bhk1 = json['bhk1'] ?? '';
-    bhk2 = json['bhk2'] ?? '';
-    bhk3 = json['bhk3'] ?? '';
-    bhk4 = json['bhk4'] ?? '';
-    bhk5 = json['bhk5'] ?? '';
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['bhk1'] = bhk1;
-    data['bhk2'] = bhk2;
-    data['bhk3'] = bhk3;
-    data['bhk4'] = bhk4;
-    data['bhk5'] = bhk5;
-
-    return data;
-  }
+  factory FirstTimeServiceModel.fromMap(Map<String, dynamic> map) => FirstTimeServiceModel(
+        bhk1: map["bhk1"] ?? "",
+        bhk2: map["bhk2"] ?? "",
+        bhk3: map["bhk3"] ?? "",
+        bhk4: map["bhk4"] ?? "",
+        bhk5: map["bhk5"] ?? "",
+      );
 }
-
-class SecondTimeService {
+class SecondTimeServiceModel {
   String? bhk1;
   String? bhk2;
   String? bhk3;
   String? bhk4;
   String? bhk5;
 
-  SecondTimeService({
+  SecondTimeServiceModel({
     this.bhk1,
     this.bhk2,
     this.bhk3,
@@ -96,40 +89,30 @@ class SecondTimeService {
     this.bhk5,
   });
 
-  SecondTimeService.fromDocumentSnapshot(
-    DocumentSnapshot documentSnapshot,
-  ) {
-    Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
-    bhk1 = data['bhk1'] ?? '';
-    bhk2 = data['bhk2'] ?? '';
-    bhk3 = data['bhk3'] ?? '';
-    bhk4 = data['bhk4'] ?? '';
-    bhk5 = data['bhk5'] ?? '';
+  Map<String, dynamic> toMap() {
+    return {
+      "bhk1": bhk1,
+      "bhk2": bhk2,
+      "bhk3": bhk3,
+      "bhk4": bhk4,
+      "bhk5": bhk5,
+    };
   }
 
-  SecondTimeService.fromJson(Map<String, dynamic> json) {
-    bhk1 = json['bhk1'] ?? '';
-    bhk2 = json['bhk2'] ?? '';
-    bhk3 = json['bhk3'] ?? '';
-    bhk4 = json['bhk4'] ?? '';
-    bhk5 = json['bhk5'] ?? '';
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['bhk1'] = bhk1;
-    data['bhk2'] = bhk2;
-    data['bhk3'] = bhk3;
-    data['bhk4'] = bhk4;
-    data['bhk5'] = bhk5;
-
-    return data;
-  }
+  factory SecondTimeServiceModel.fromMap(Map<String, dynamic> map) => SecondTimeServiceModel(
+        bhk1: map["bhk1"] ?? "",
+        bhk2: map["bhk2"] ?? "",
+        bhk3: map["bhk3"] ?? "",
+        bhk4: map["bhk4"] ?? "",
+        bhk5: map["bhk5"] ?? "",
+      );
 }
+
 
 class ServiceCheckListModel {
   final ServiceModel service;
   bool isChecked;
+
   ServiceCheckListModel({
     required this.service,
     this.isChecked = false,

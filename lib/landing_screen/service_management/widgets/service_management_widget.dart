@@ -12,6 +12,7 @@ import 'package:service365_admin_panel/landing_screen/service_management/model/s
 import 'package:service365_admin_panel/landing_screen/service_management/widgets/add_city_dialog.dart';
 import 'package:service365_admin_panel/landing_screen/service_management/widgets/add_service_dialog.dart';
 import 'package:service365_admin_panel/tools/responsive_handler.dart';
+import 'package:service365_admin_panel/utility/image_picker.dart';
 import 'package:service365_admin_panel/utility/spinloading_indicator.dart';
 
 import '../../../utility/text_field_widget.dart';
@@ -161,14 +162,12 @@ class CityManagement extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: _deviceSize.width * 0.05),
             child: StreamBuilder<List<CityModel?>>(
-              stream: BlocProvider.of<CityManagerCubit>(context)
-                  .fetchCity(context: context),
+              stream: BlocProvider.of<CityManagerCubit>(context).fetchCity(context: context),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return SizedBox(
                     height: _deviceSize.height * 0.6,
-                    width: _deviceSize.width *
-                        (ResponsiveWidget.isDesktop(context) ? 0.3 : 0.6),
+                    width: _deviceSize.width * (ResponsiveWidget.isDesktop(context) ? 0.3 : 0.6),
                     child: const Center(
                       child: SpinLoadingIndicator(),
                     ),
@@ -205,108 +204,94 @@ class CityManagement extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return Column(children: [
                               const Divider(),
-                              Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                                Text(
+                                  logs[index]?.cityName ?? 'N/A',
+                                  style: _serviceTextFontStyle,
+                                ),
+                                Wrap(
                                   children: [
-                                    Text(
-                                      logs[index]?.cityName ?? 'N/A',
-                                      style: _serviceTextFontStyle,
-                                    ),
-                                    Wrap(
-                                      children: [
-                                        IconButton(
-                                          onPressed: () async {
-                                            await showDialog(
-                                              context: context,
-                                              builder: (dialogContext) {
-                                                return StatefulBuilder(builder:
-                                                    (dialogContext, setState) {
-                                                  return AlertDialog(
-                                                    title: const Text(
-                                                      'Edit City',
-                                                      style: TextStyle(
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                    content:
-                                                        AddCityDialogWidget(
-                                                      cityModel: logs[index],
-                                                    ),
-                                                  );
-                                                });
-                                              },
-                                            );
+                                    IconButton(
+                                      onPressed: () async {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (dialogContext) {
+                                            return StatefulBuilder(builder: (dialogContext, setState) {
+                                              return AlertDialog(
+                                                title: const Text(
+                                                  'Edit City',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                content: AddCityDialogWidget(
+                                                  cityModel: logs[index],
+                                                ),
+                                              );
+                                            });
                                           },
-                                          icon: const Icon(
-                                            Icons.edit,
-                                            size: 20,
-                                          ),
-                                        ),
-                                        IconButton(
-                                          onPressed: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (ctx) => AlertDialog(
-                                                title: Text(
-                                                  "Are you sure!",
-                                                  style:
-                                                      _diologHeadingTextFontStyle,
+                                        );
+                                      },
+                                      icon: const Icon(
+                                        Icons.edit,
+                                        size: 20,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (ctx) => AlertDialog(
+                                            title: Text(
+                                              "Are you sure!",
+                                              style: _diologHeadingTextFontStyle,
+                                            ),
+                                            content: Text(
+                                              "You are about to delete the city ${logs[index]?.cityName}!",
+                                              style: _diologBodyTextFontStyle,
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                  primary: Colors.white,
                                                 ),
-                                                content: Text(
-                                                  "You are about to delete the city ${logs[index]?.cityName}!",
-                                                  style:
-                                                      _diologBodyTextFontStyle,
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text(
+                                                  'No',
+                                                  style: _diologActionTextFontStyle,
                                                 ),
-                                                actions: [
-                                                  TextButton(
-                                                    style: TextButton.styleFrom(
-                                                      primary: Colors.white,
-                                                    ),
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: Text(
-                                                      'No',
-                                                      style:
-                                                          _diologActionTextFontStyle,
-                                                    ),
-                                                  ),
-                                                  TextButton(
-                                                    style: TextButton.styleFrom(
-                                                      primary: Colors.white,
-                                                    ),
-                                                    onPressed: () async {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                      await BlocProvider.of<
-                                                                  CityManagerCubit>(
-                                                              context)
-                                                          .deleteCity(
-                                                        cityModel: logs[index]!,
-                                                        context: context,
-                                                      );
-                                                    },
-                                                    child: Text(
-                                                      'Yes',
-                                                      style:
-                                                          _diologActionTextFontStyle,
-                                                    ),
-                                                  ),
-                                                ],
                                               ),
-                                            );
-                                          },
-                                          icon: const Icon(
-                                            Icons.delete,
-                                            size: 22,
-                                            color: Colors.red,
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                  primary: Colors.white,
+                                                ),
+                                                onPressed: () async {
+                                                  Navigator.of(context).pop();
+                                                  await BlocProvider.of<CityManagerCubit>(context).deleteCity(
+                                                    cityModel: logs[index]!,
+                                                    context: context,
+                                                  );
+                                                },
+                                                child: Text(
+                                                  'Yes',
+                                                  style: _diologActionTextFontStyle,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                      ],
+                                        );
+                                      },
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        size: 22,
+                                        color: Colors.red,
+                                      ),
                                     ),
-                                  ]),
+                                  ],
+                                ),
+                              ]),
                               const Divider(),
                             ]);
                           }),
@@ -322,9 +307,10 @@ class CityManagement extends StatelessWidget {
   }
 }
 
-class ServiceManagement extends StatelessWidget {
+class ServiceManagement extends StatefulWidget {
   ServiceManagement({
     Key? key,
+    this.firstTimeService,
     required Size deviceSize,
     required TextStyle serviceTextFontStyle,
     required TextStyle diologHeadingTextFontStyle,
@@ -342,6 +328,7 @@ class ServiceManagement extends StatelessWidget {
   final TextStyle _diologHeadingTextFontStyle;
   final TextStyle _diologBodyTextFontStyle;
   final TextStyle _diologActionTextFontStyle;
+  final FirstTimeServiceModel? firstTimeService;
 
   static TextStyle textStyle = GoogleFonts.poppins(
     textStyle: TextStyle(
@@ -351,39 +338,124 @@ class ServiceManagement extends StatelessWidget {
     ),
   );
 
+  @override
+  State<ServiceManagement> createState() => _ServiceManagementState();
+}
+
+class _ServiceManagementState extends State<ServiceManagement> {
   final _firstBhk1Controller = TextEditingController();
+
   final _firstBhk2Controller = TextEditingController();
+
   final _firstBhk3Controller = TextEditingController();
+
   final _firstBhk4Controller = TextEditingController();
+
   final _firstBhk5Controller = TextEditingController();
 
-  final _addButton = ElevatedButton(
-    child: const Text('Add'),
-    style: ButtonStyle(
-      padding: MaterialStateProperty.all(EdgeInsets.symmetric(
-        // horizontal: _deviceSize.width *
-        //     (ResponsiveWidget.isMobile(context) ? 0.1 : 0.05),
-        // vertical: _deviceSize.height * 0.02,
-        horizontal: 80.w,
-        vertical: 10.h,
-      )),
-      shape: MaterialStateProperty.all(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+
+
+
+
+  Future<void> _submit({
+    String? id,
+    String? imageUrl,
+    String? serviceName,
+  }) async {
+    if (widget.firstTimeService == null) {
+      await BlocProvider.of<ServiceCubit>(context).addPriceService(
+        context: context,
+        id: id,
+        serviceModel: ServiceModel(
+          firstTimeServiceModel: FirstTimeServiceModel(
+            bhk1: _firstBhk1Controller.text,
+            bhk2: _firstBhk2Controller.text,
+            bhk3: _firstBhk3Controller.text,
+            bhk4: _firstBhk4Controller.text,
+            bhk5: _firstBhk5Controller.text,
+          ),
+          secondTimeServiceModel: SecondTimeServiceModel(
+            bhk1: _firstBhk1Controller.text,
+            bhk2: _firstBhk2Controller.text,
+            bhk3: _firstBhk3Controller.text,
+            bhk4: _firstBhk4Controller.text,
+            bhk5: _firstBhk5Controller.text,
+          ),
+          id: id,
+          imageUrl: imageUrl,
+          serviceName: serviceName,
         ),
+      );
+      //Close the dialog box
+    } else {
+      // await BlocProvider.of<ServiceCubit>(context).editService(
+      //   context: context,
+      //   service: ServiceModel(firstTimeService: FirstTimeService()),
+      // );
+    }
+    Navigator.of(context).pop();
+  }
+
+  Widget _addButtons({
+    String? id,
+    String? imageUrl,
+    String? serviceName,
+  }) {
+    return ElevatedButton(
+      child: Text('Add'),
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all(EdgeInsets.symmetric(
+          // horizontal: _deviceSize.width *
+          //     (ResponsiveWidget.isMobile(context) ? 0.1 : 0.05),
+          // vertical: _deviceSize.height * 0.02,
+          horizontal: 80.w,
+          vertical: 10.h,
+        )),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        backgroundColor: MaterialStateProperty.all(UiColors.themeColor),
+        foregroundColor: MaterialStateProperty.all(UiColors.logInButtonForeground),
+        textStyle: MaterialStateProperty.all(ServiceManagement.textStyle),
       ),
-      backgroundColor: MaterialStateProperty.all(UiColors.themeColor),
-      foregroundColor:
-          MaterialStateProperty.all(UiColors.logInButtonForeground),
-      textStyle: MaterialStateProperty.all(textStyle),
-    ),
-    onPressed: () async {
-      // await _submit();
-    },
-  );
+      onPressed: () async {
+        await _submit(
+          id: id,
+          imageUrl: imageUrl,
+          serviceName: serviceName,
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    final _addButton = ElevatedButton(
+      child: Text('Add'),
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all(EdgeInsets.symmetric(
+          // horizontal: _deviceSize.width *
+          //     (ResponsiveWidget.isMobile(context) ? 0.1 : 0.05),
+          // vertical: _deviceSize.height * 0.02,
+          horizontal: 80.w,
+          vertical: 10.h,
+        )),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        backgroundColor: MaterialStateProperty.all(UiColors.themeColor),
+        foregroundColor: MaterialStateProperty.all(UiColors.logInButtonForeground),
+        textStyle: MaterialStateProperty.all(ServiceManagement.textStyle),
+      ),
+      onPressed: () async {
+        await _submit();
+      },
+    );
+
     return Container(
       color: Colors.black45,
       // width: _deviceSize.width *
@@ -398,8 +470,7 @@ class ServiceManagement extends StatelessWidget {
             title: 'SERVICE MANAGEMENT',
             buttonName: 'Add Service',
             onPressed: () async {
-              await BlocProvider.of<PickServiceImageCubit>(context)
-                  .resetImage();
+              await BlocProvider.of<PickServiceImageCubit>(context).resetImage();
               await showDialog(
                 context: context,
                 builder: (dialogContext) {
@@ -420,16 +491,14 @@ class ServiceManagement extends StatelessWidget {
             },
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: _deviceSize.width * 0.05),
+            padding: EdgeInsets.symmetric(horizontal: widget._deviceSize.width * 0.05),
             child: StreamBuilder<List<ServiceModel?>>(
-                stream: BlocProvider.of<ServiceCubit>(context)
-                    .fetchService(context: context),
+                stream: BlocProvider.of<ServiceCubit>(context).fetchService(context: context),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return SizedBox(
-                      height: _deviceSize.height * 0.6,
-                      width: _deviceSize.width *
-                          (ResponsiveWidget.isDesktop(context) ? 0.3 : 0.6),
+                      height: widget._deviceSize.height * 0.6,
+                      width: widget._deviceSize.width * (ResponsiveWidget.isDesktop(context) ? 0.3 : 0.6),
                       child: const Center(
                         child: SpinLoadingIndicator(),
                       ),
@@ -470,6 +539,7 @@ class ServiceManagement extends StatelessWidget {
                               GestureDetector(
                                 onTap: () async {
                                   print('=====$index');
+                                  print('=====${logs[index]?.id}');
                                   switch (index) {
                                     case 0:
                                       await showDialog(
@@ -480,43 +550,41 @@ class ServiceManagement extends StatelessWidget {
                                               return AlertDialog(
                                                 title: buildText(logs, index),
                                                 content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
+                                                  mainAxisSize: MainAxisSize.min,
                                                   children: [
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk1Controller,
+                                                      controller: _firstBhk1Controller,
                                                       text: '1 BHK',
                                                       hintText: '1 BHK',
                                                     ),
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk2Controller,
+                                                      controller: _firstBhk2Controller,
                                                       text: '2 BHK',
                                                       hintText: '2 BHK',
                                                     ),
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk3Controller,
+                                                      controller: _firstBhk3Controller,
                                                       text: '3 BHK',
                                                       hintText: '3 BHK',
                                                     ),
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk4Controller,
+                                                      controller: _firstBhk4Controller,
                                                       text: '4 BHK',
                                                       hintText: '4 BHK',
                                                     ),
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk5Controller,
+                                                      controller: _firstBhk5Controller,
                                                       text: '5 BHK',
                                                       hintText: '5 BHK',
                                                     ),
                                                     SizedBox(
                                                       height: 2.h,
                                                     ),
-                                                    _addButton,
+                                                    _addButtons(
+                                                      id: logs[index]?.id ?? "",
+                                                      serviceName: logs[index]?.serviceName ?? "",
+                                                      imageUrl: logs[index]?.imageUrl ?? "",
+                                                    ),
                                                   ],
                                                 ),
                                               );
@@ -534,12 +602,10 @@ class ServiceManagement extends StatelessWidget {
                                               return AlertDialog(
                                                 title: buildText(logs, index),
                                                 content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
+                                                  mainAxisSize: MainAxisSize.min,
                                                   children: [
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk1Controller,
+                                                      controller: _firstBhk1Controller,
                                                       text: '1 BHK',
                                                       hintText: '1 BHK',
                                                     ),
@@ -564,18 +630,15 @@ class ServiceManagement extends StatelessWidget {
                                               return AlertDialog(
                                                 title: buildText(logs, index),
                                                 content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
+                                                  mainAxisSize: MainAxisSize.min,
                                                   children: [
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk1Controller,
+                                                      controller: _firstBhk1Controller,
                                                       text: '1 BHK',
                                                       hintText: '1 BHK',
                                                     ),
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk2Controller,
+                                                      controller: _firstBhk2Controller,
                                                       text: '2 BHK',
                                                       hintText: '2 BHK',
                                                     ),
@@ -600,18 +663,15 @@ class ServiceManagement extends StatelessWidget {
                                               return AlertDialog(
                                                 title: buildText(logs, index),
                                                 content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
+                                                  mainAxisSize: MainAxisSize.min,
                                                   children: [
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk1Controller,
+                                                      controller: _firstBhk1Controller,
                                                       text: '1 BHK',
                                                       hintText: '1 BHK',
                                                     ),
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk2Controller,
+                                                      controller: _firstBhk2Controller,
                                                       text: '2 BHK',
                                                       hintText: '2 BHK',
                                                     ),
@@ -636,18 +696,15 @@ class ServiceManagement extends StatelessWidget {
                                               return AlertDialog(
                                                 title: buildText(logs, index),
                                                 content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
+                                                  mainAxisSize: MainAxisSize.min,
                                                   children: [
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk1Controller,
+                                                      controller: _firstBhk1Controller,
                                                       text: '1 BHK',
                                                       hintText: '1 BHK',
                                                     ),
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk2Controller,
+                                                      controller: _firstBhk2Controller,
                                                       text: '2 BHK',
                                                       hintText: '2 BHK',
                                                     ),
@@ -672,18 +729,15 @@ class ServiceManagement extends StatelessWidget {
                                               return AlertDialog(
                                                 title: buildText(logs, index),
                                                 content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
+                                                  mainAxisSize: MainAxisSize.min,
                                                   children: [
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk1Controller,
+                                                      controller: _firstBhk1Controller,
                                                       text: '1 BHK',
                                                       hintText: '1 BHK',
                                                     ),
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk2Controller,
+                                                      controller: _firstBhk2Controller,
                                                       text: '2 BHK',
                                                       hintText: '2 BHK',
                                                     ),
@@ -708,18 +762,15 @@ class ServiceManagement extends StatelessWidget {
                                               return AlertDialog(
                                                 title: buildText(logs, index),
                                                 content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
+                                                  mainAxisSize: MainAxisSize.min,
                                                   children: [
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk1Controller,
+                                                      controller: _firstBhk1Controller,
                                                       text: '1 BHK',
                                                       hintText: '1 BHK',
                                                     ),
                                                     buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk2Controller,
+                                                      controller: _firstBhk2Controller,
                                                       text: '2 BHK',
                                                       hintText: '2 BHK',
                                                     ),
@@ -736,115 +787,95 @@ class ServiceManagement extends StatelessWidget {
                                       );
                                   }
                                 },
-                                child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                                  Text(
+                                    logs[index]?.serviceName ?? 'N/A',
+                                    style: widget._serviceTextFontStyle,
+                                  ),
+                                  Wrap(
                                     children: [
-                                      Text(
-                                        logs[index]?.serviceName ?? 'N/A',
-                                        style: _serviceTextFontStyle,
-                                      ),
-                                      Wrap(
-                                        children: [
-                                          IconButton(
-                                            onPressed: () async {
-                                              await BlocProvider.of<
-                                                          PickServiceImageCubit>(
-                                                      context)
-                                                  .resetImage();
-                                              await showDialog(
-                                                context: context,
-                                                builder: (dialogContext) {
-                                                  return StatefulBuilder(
-                                                      builder: (dialogContext,
-                                                          setState) {
-                                                    return AlertDialog(
-                                                      title: const Text(
-                                                        'Edit Service',
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                        ),
-                                                      ),
-                                                      content:
-                                                          AddServiceDialogWidget(
-                                                        service: logs[index],
-                                                      ),
-                                                    );
-                                                  });
-                                                },
-                                              );
+                                      IconButton(
+                                        onPressed: () async {
+                                          await BlocProvider.of<PickServiceImageCubit>(context).resetImage();
+                                          await showDialog(
+                                            context: context,
+                                            builder: (dialogContext) {
+                                              return StatefulBuilder(builder: (dialogContext, setState) {
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                    'Edit Service',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  content: AddServiceDialogWidget(
+                                                    service: logs[index],
+                                                  ),
+                                                );
+                                              });
                                             },
-                                            icon: const Icon(
-                                              Icons.edit,
-                                              size: 20,
-                                            ),
-                                          ),
-                                          IconButton(
-                                            onPressed: () {
-                                              showDialog(
-                                                context: context,
-                                                builder: (ctx) => AlertDialog(
-                                                  title: Text(
-                                                    "Are you sure!",
-                                                    style:
-                                                        _diologHeadingTextFontStyle,
+                                          );
+                                        },
+                                        icon: const Icon(
+                                          Icons.edit,
+                                          size: 20,
+                                        ),
+                                      ),
+                                      IconButton(
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (ctx) => AlertDialog(
+                                              title: Text(
+                                                "Are you sure!",
+                                                style: widget._diologHeadingTextFontStyle,
+                                              ),
+                                              content: Text(
+                                                "You are about to delete the service ${logs[index]?.serviceName}!",
+                                                style: widget._diologBodyTextFontStyle,
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  style: TextButton.styleFrom(
+                                                    primary: Colors.white,
                                                   ),
-                                                  content: Text(
-                                                    "You are about to delete the service ${logs[index]?.serviceName}!",
-                                                    style:
-                                                        _diologBodyTextFontStyle,
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text(
+                                                    'No',
+                                                    style: widget._diologActionTextFontStyle,
                                                   ),
-                                                  actions: [
-                                                    TextButton(
-                                                      style:
-                                                          TextButton.styleFrom(
-                                                        primary: Colors.white,
-                                                      ),
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: Text(
-                                                        'No',
-                                                        style:
-                                                            _diologActionTextFontStyle,
-                                                      ),
-                                                    ),
-                                                    TextButton(
-                                                      style:
-                                                          TextButton.styleFrom(
-                                                        primary: Colors.white,
-                                                      ),
-                                                      onPressed: () async {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                        await BlocProvider.of<
-                                                                    ServiceCubit>(
-                                                                context)
-                                                            .deleteService(
-                                                          service: logs[index]!,
-                                                          context: context,
-                                                        );
-                                                      },
-                                                      child: Text(
-                                                        'Yes',
-                                                        style:
-                                                            _diologActionTextFontStyle,
-                                                      ),
-                                                    ),
-                                                  ],
                                                 ),
-                                              );
-                                            },
-                                            icon: const Icon(
-                                              Icons.delete,
-                                              size: 22,
-                                              color: Colors.red,
+                                                TextButton(
+                                                  style: TextButton.styleFrom(
+                                                    primary: Colors.white,
+                                                  ),
+                                                  onPressed: () async {
+                                                    Navigator.of(context).pop();
+                                                    await BlocProvider.of<ServiceCubit>(context).deleteService(
+                                                      service: logs[index]!,
+                                                      context: context,
+                                                    );
+                                                  },
+                                                  child: Text(
+                                                    'Yes',
+                                                    style: widget._diologActionTextFontStyle,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ),
-                                        ],
+                                          );
+                                        },
+                                        icon: const Icon(
+                                          Icons.delete,
+                                          size: 22,
+                                          color: Colors.red,
+                                        ),
                                       ),
-                                    ]),
+                                    ],
+                                  ),
+                                ]),
                               ),
                               const Divider(),
                             ]);
