@@ -325,7 +325,7 @@ class CityManagement extends StatelessWidget {
 class ServiceManagement extends StatefulWidget {
   ServiceManagement({
     Key? key,
-    this.firstTimeService,
+    // this.firstTimeService,
     required Size deviceSize,
     required TextStyle serviceTextFontStyle,
     required TextStyle diologHeadingTextFontStyle,
@@ -343,7 +343,8 @@ class ServiceManagement extends StatefulWidget {
   final TextStyle _diologHeadingTextFontStyle;
   final TextStyle _diologBodyTextFontStyle;
   final TextStyle _diologActionTextFontStyle;
-  final FirstTimeServiceModel? firstTimeService;
+
+  // final FirstTimeServiceModel? firstTimeService;
 
   static TextStyle textStyle = GoogleFonts.poppins(
     textStyle: TextStyle(
@@ -363,6 +364,11 @@ class _ServiceManagementState extends State<ServiceManagement> {
   final _firstBhk3Controller = TextEditingController();
   final _firstBhk4Controller = TextEditingController();
   final _firstBhk5Controller = TextEditingController();
+  final secondBhk1Controller = TextEditingController();
+  final secondBhk2Controller = TextEditingController();
+  final secondBhk3Controller = TextEditingController();
+  final secondBhk4Controller = TextEditingController();
+  final secondBhk5Controller = TextEditingController();
 
   // cook
   final firstCook1Controller = TextEditingController();
@@ -379,44 +385,43 @@ class _ServiceManagementState extends State<ServiceManagement> {
   final driver7SeaterController = TextEditingController();
   final driverCarsController = TextEditingController();
 
-  Future<void> _submit({
-    String? id,
-    String? imageUrl,
-    String? serviceName,
-  }) async {
-    if (widget.firstTimeService == null) {
-      await BlocProvider.of<ServiceCubit>(context).addPriceService(
-        context: context,
-        id: id,
-        serviceModel: ServiceModel(
-          firstTimeServiceModel: FirstTimeServiceModel(
-            bhk1: _firstBhk1Controller.text,
-            bhk2: _firstBhk2Controller.text,
-            bhk3: _firstBhk3Controller.text,
-            bhk4: _firstBhk4Controller.text,
-            bhk5: _firstBhk5Controller.text,
-          ),
-          secondTimeServiceModel: SecondTimeServiceModel(
-            bhk1: _firstBhk1Controller.text,
-            bhk2: _firstBhk2Controller.text,
-            bhk3: _firstBhk3Controller.text,
-            bhk4: _firstBhk4Controller.text,
-            bhk5: _firstBhk5Controller.text,
-          ),
-          id: id,
-          imageUrl: imageUrl,
-          serviceName: serviceName,
-        ),
-      );
-      //Close the dialog box
-    } else {
-      // await BlocProvider.of<ServiceCubit>(context).editService(
-      //   context: context,
-      //   service: ServiceModel(firstTimeService: FirstTimeService()),
-      // );
-    }
-    Navigator.of(context).pop();
-  }
+  // Future<void> _submit({
+  //   String? id,
+  //   String? imageUrl,
+  //   String? serviceName,
+  // }) async {
+  //   if (widget.firstTimeService == null) {
+  //     await BlocProvider.of<ServiceCubit>(context).maidPriceService(
+  //       context: context,
+  //       serviceModel: ServiceModel(
+  //         firstTimeServiceModel: FirstTimeServiceModel(
+  //           bhk1: _firstBhk1Controller.text,
+  //           bhk2: _firstBhk2Controller.text,
+  //           bhk3: _firstBhk3Controller.text,
+  //           bhk4: _firstBhk4Controller.text,
+  //           bhk5: _firstBhk5Controller.text,
+  //         ),
+  //         secondTimeServiceModel: SecondTimeServiceModel(
+  //           bhk1: _firstBhk1Controller.text,
+  //           bhk2: _firstBhk2Controller.text,
+  //           bhk3: _firstBhk3Controller.text,
+  //           bhk4: _firstBhk4Controller.text,
+  //           bhk5: _firstBhk5Controller.text,
+  //         ),
+  //         id: id,
+  //         imageUrl: imageUrl,
+  //         serviceName: serviceName,
+  //       ),
+  //     );
+  //     //Close the dialog box
+  //   } else {
+  //     // await BlocProvider.of<ServiceCubit>(context).editService(
+  //     //   context: context,
+  //     //   service: ServiceModel(firstTimeService: FirstTimeService()),
+  //     // );
+  //   }
+  //   Navigator.of(context).pop();
+  // }
 
   Widget _addButtons({
     String? id,
@@ -570,541 +575,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                                 onTap: () async {
                                   print('=====$index');
                                   print('=====${logs[index]?.id}');
-                                  switch (index) {
-                                    case 0:
-                                      await showDialog(
-                                        context: context,
-                                        builder: (dialogContext) {
-                                          return StatefulBuilder(
-                                            builder: (dialogContext, setState) {
-                                              return AlertDialog(
-                                                title: buildText(logs, index),
-                                                content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk1Controller,
-                                                      text: '1 BHK',
-                                                      hintText: '1 BHK',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk2Controller,
-                                                      text: '2 BHK',
-                                                      hintText: '2 BHK',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk3Controller,
-                                                      text: '3 BHK',
-                                                      hintText: '3 BHK',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk4Controller,
-                                                      text: '4 BHK',
-                                                      hintText: '4 BHK',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk5Controller,
-                                                      text: '5 BHK',
-                                                      hintText: '5 BHK',
-                                                    ),
-                                                    SizedBox(
-                                                      height: 2.h,
-                                                    ),
-                                                    _addButtons(
-                                                      id: logs[index]?.id ?? "",
-                                                      serviceName: logs[index]
-                                                              ?.serviceName ??
-                                                          "",
-                                                      imageUrl: logs[index]
-                                                              ?.imageUrl ??
-                                                          "",
-                                                      onPressed: () async {
-                                                        if (widget
-                                                                .firstTimeService ==
-                                                            null) {
-                                                          await BlocProvider.of<
-                                                                      ServiceCubit>(
-                                                                  context)
-                                                              .addPriceService(
-                                                            context: context,
-                                                            id: logs[index]
-                                                                    ?.id ??
-                                                                "",
-                                                            serviceModel:
-                                                                ServiceModel(
-                                                              firstTimeServiceModel:
-                                                                  FirstTimeServiceModel(
-                                                                bhk1:
-                                                                    _firstBhk1Controller
-                                                                        .text,
-                                                                bhk2:
-                                                                    _firstBhk2Controller
-                                                                        .text,
-                                                                bhk3:
-                                                                    _firstBhk3Controller
-                                                                        .text,
-                                                                bhk4:
-                                                                    _firstBhk4Controller
-                                                                        .text,
-                                                                bhk5:
-                                                                    _firstBhk5Controller
-                                                                        .text,
-                                                              ),
-                                                              secondTimeServiceModel:
-                                                                  SecondTimeServiceModel(
-                                                                bhk1:
-                                                                    _firstBhk1Controller
-                                                                        .text,
-                                                                bhk2:
-                                                                    _firstBhk2Controller
-                                                                        .text,
-                                                                bhk3:
-                                                                    _firstBhk3Controller
-                                                                        .text,
-                                                                bhk4:
-                                                                    _firstBhk4Controller
-                                                                        .text,
-                                                                bhk5:
-                                                                    _firstBhk5Controller
-                                                                        .text,
-                                                              ),
-                                                              imageUrl: logs[
-                                                                          index]
-                                                                      ?.imageUrl ??
-                                                                  "",
-                                                              serviceName: logs[
-                                                                          index]
-                                                                      ?.serviceName ??
-                                                                  "",
-                                                            ),
-                                                          );
-                                                          //Close the dialog box
-                                                        } else {
-                                                          // await BlocProvider.of<ServiceCubit>(context).editService(
-                                                          //   context: context,
-                                                          //   service: ServiceModel(firstTimeService: FirstTimeService()),
-                                                          // );
-                                                        }
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      );
-                                      break;
-                                    case 1:
-                                      await showDialog(
-                                        context: context,
-                                        builder: (dialogContext) {
-                                          return StatefulBuilder(
-                                            builder: (dialogContext, setState) {
-                                              return AlertDialog(
-                                                title: buildText(logs, index),
-                                                content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          firstCook1Controller,
-                                                      text: '1 COOK',
-                                                      hintText: '1 COOK',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          firstCook2Controller,
-                                                      text: '2 COOK',
-                                                      hintText: '2 COOK',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          firstCook3Controller,
-                                                      text: '3 COOK',
-                                                      hintText: '3 COOK',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          firstCook4Controller,
-                                                      text: '4 COOK',
-                                                      hintText: '4 COOK',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          firstCook5Controller,
-                                                      text: '5 COOK',
-                                                      hintText: '5 COOK',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          firstCook6Controller,
-                                                      text: '6 COOK',
-                                                      hintText: '6 COOK',
-                                                    ),
-                                                    SizedBox(
-                                                      height: 2.h,
-                                                    ),
-                                                    _addButtons(
-                                                      id: logs[index]?.id ?? "",
-                                                      serviceName: logs[index]
-                                                              ?.serviceName ??
-                                                          "",
-                                                      imageUrl: logs[index]
-                                                              ?.imageUrl ??
-                                                          "",
-                                                      onPressed: () async {
-                                                        if (widget
-                                                                .firstTimeService ==
-                                                            null) {
-                                                          await BlocProvider.of<
-                                                                      ServiceCubit>(
-                                                                  context)
-                                                              .addCookPriceService(
-                                                            context: context,
-                                                            id: logs[index]
-                                                                    ?.id ??
-                                                                "",
-                                                            serviceModel:
-                                                                ServiceModel(
-                                                              cookFirstServiceModel:
-                                                                  CookFirstServiceModel(
-                                                                firstPerson1:
-                                                                    firstCook1Controller
-                                                                        .text,
-                                                                firstPerson2:
-                                                                    firstCook2Controller
-                                                                        .text,
-                                                                firstPerson3:
-                                                                    firstCook3Controller
-                                                                        .text,
-                                                                firstPerson4:
-                                                                    firstCook4Controller
-                                                                        .text,
-                                                                firstPerson5:
-                                                                    firstCook5Controller
-                                                                        .text,
-                                                                firstPerson6:
-                                                                    firstCook6Controller
-                                                                        .text,
-                                                              ),
-                                                              cookSecondTimeServiceModel:
-                                                                  CookSecondTimeServiceModel(
-                                                                secondPerson1:
-                                                                    firstCook1Controller
-                                                                        .text,
-                                                                secondPerson2:
-                                                                    firstCook2Controller
-                                                                        .text,
-                                                                secondPerson3:
-                                                                    firstCook3Controller
-                                                                        .text,
-                                                                secondPerson4:
-                                                                    firstCook4Controller
-                                                                        .text,
-                                                                secondPerson5:
-                                                                    firstCook5Controller
-                                                                        .text,
-                                                                secondPerson6:
-                                                                    firstCook6Controller
-                                                                        .text,
-                                                              ),
-                                                              imageUrl: logs[
-                                                                          index]
-                                                                      ?.imageUrl ??
-                                                                  "",
-                                                              serviceName: logs[
-                                                                          index]
-                                                                      ?.serviceName ??
-                                                                  "",
-                                                            ),
-                                                          );
-                                                          //Close the dialog box
-                                                        } else {
-                                                          // await BlocProvider.of<ServiceCubit>(context).editService(
-                                                          //   context: context,
-                                                          //   service: ServiceModel(firstTimeService: FirstTimeService()),
-                                                          // );
-                                                        }
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      );
-                                      break;
-                                    case 2:
-                                      await showDialog(
-                                        context: context,
-                                        builder: (dialogContext) {
-                                          return StatefulBuilder(
-                                            builder: (dialogContext, setState) {
-                                              return AlertDialog(
-                                                title: buildText(logs, index),
-                                                content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          driverSmallController,
-                                                      text: 'Small',
-                                                      hintText: 'Small',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          driverMediumController,
-                                                      text: 'Medium/Sedan',
-                                                      hintText: 'Medium/Sedan',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          driverSuvController,
-                                                      text: 'Compact SUV',
-                                                      hintText: 'Compact SUV',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          driver7SeaterController,
-                                                      text: 'SUV 7Seater',
-                                                      hintText: 'SUV 7Seater',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          driverCarsController,
-                                                      text: 'Luxury Cars',
-                                                      hintText: 'Luxury Cars',
-                                                    ),
-                                                    SizedBox(
-                                                      height: 2.h,
-                                                    ),
-                                                    _addButtons(
-                                                      id: logs[index]?.id ?? "",
-                                                      serviceName: logs[index]
-                                                              ?.serviceName ??
-                                                          "",
-                                                      imageUrl: logs[index]
-                                                              ?.imageUrl ??
-                                                          "",
-                                                      onPressed: () async {
-                                                        if (widget
-                                                                .firstTimeService ==
-                                                            null) {
-                                                          await BlocProvider.of<
-                                                                      ServiceCubit>(
-                                                                  context)
-                                                              .addCookPriceService(
-                                                            context: context,
-                                                            id: logs[index]
-                                                                    ?.id ??
-                                                                "",
-                                                            serviceModel:
-                                                                ServiceModel(
-                                                              driverModel:
-                                                                  DriverModel(
-                                                                driverSmall:
-                                                                    driverSmallController
-                                                                        .text,
-                                                                driverMedium:
-                                                                    driverMediumController
-                                                                        .text,
-                                                                driverSuv:
-                                                                    driverSuvController
-                                                                        .text,
-                                                                driver7Seater:
-                                                                    driver7SeaterController
-                                                                        .text,
-                                                                driverCars:
-                                                                    driverCarsController
-                                                                        .text,
-                                                              ),
-                                                              imageUrl: logs[
-                                                                          index]
-                                                                      ?.imageUrl ??
-                                                                  "",
-                                                              serviceName: logs[
-                                                                          index]
-                                                                      ?.serviceName ??
-                                                                  "",
-                                                            ),
-                                                          );
-                                                          //Close the dialog box
-                                                        } else {
-                                                          // await BlocProvider.of<ServiceCubit>(context).editService(
-                                                          //   context: context,
-                                                          //   service: ServiceModel(firstTimeService: FirstTimeService()),
-                                                          // );
-                                                        }
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                    ),
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      );
-                                      break;
-                                    case 3:
-                                      await showDialog(
-                                        context: context,
-                                        builder: (dialogContext) {
-                                          return StatefulBuilder(
-                                            builder: (dialogContext, setState) {
-                                              return AlertDialog(
-                                                title: buildText(logs, index),
-                                                content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk1Controller,
-                                                      text: '1 BHK',
-                                                      hintText: '1 BHK',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk2Controller,
-                                                      text: '2 BHK',
-                                                      hintText: '2 BHK',
-                                                    ),
-                                                    SizedBox(
-                                                      height: 2.h,
-                                                    ),
-                                                    _addButton,
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      );
-                                      break;
-                                    case 4:
-                                      await showDialog(
-                                        context: context,
-                                        builder: (dialogContext) {
-                                          return StatefulBuilder(
-                                            builder: (dialogContext, setState) {
-                                              return AlertDialog(
-                                                title: buildText(logs, index),
-                                                content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk1Controller,
-                                                      text: '1 BHK',
-                                                      hintText: '1 BHK',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk2Controller,
-                                                      text: '2 BHK',
-                                                      hintText: '2 BHK',
-                                                    ),
-                                                    SizedBox(
-                                                      height: 2.h,
-                                                    ),
-                                                    _addButton,
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      );
-                                      break;
-                                    case 5:
-                                      await showDialog(
-                                        context: context,
-                                        builder: (dialogContext) {
-                                          return StatefulBuilder(
-                                            builder: (dialogContext, setState) {
-                                              return AlertDialog(
-                                                title: buildText(logs, index),
-                                                content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk1Controller,
-                                                      text: '1 BHK',
-                                                      hintText: '1 BHK',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk2Controller,
-                                                      text: '2 BHK',
-                                                      hintText: '2 BHK',
-                                                    ),
-                                                    SizedBox(
-                                                      height: 2.h,
-                                                    ),
-                                                    _addButton,
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      );
-                                      break;
-                                    default:
-                                      showDialog(
-                                        context: context,
-                                        builder: (dialogContext) {
-                                          return StatefulBuilder(
-                                            builder: (dialogContext, setState) {
-                                              return AlertDialog(
-                                                title: buildText(logs, index),
-                                                content: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk1Controller,
-                                                      text: '1 BHK',
-                                                      hintText: '1 BHK',
-                                                    ),
-                                                    buildTextFieldWidget(
-                                                      controller:
-                                                          _firstBhk2Controller,
-                                                      text: '2 BHK',
-                                                      hintText: '2 BHK',
-                                                    ),
-                                                    SizedBox(
-                                                      height: 2.h,
-                                                    ),
-                                                    _addButton,
-                                                  ],
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                      );
-                                  }
+                                  _dialog(index, logs);
                                 },
                                 child: Row(
                                     mainAxisAlignment:
@@ -1247,7 +718,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
       padding: const EdgeInsets.only(bottom: 13),
       child: TextFieldWidget(
         controller: controller!,
-        text: text!,
+        labelText: text ?? "",
         hintText: hintText,
         textInputAction: TextInputAction.next,
         keyboardType: TextInputType.text,
@@ -1259,5 +730,475 @@ class _ServiceManagementState extends State<ServiceManagement> {
         },
       ),
     );
+  }
+
+  Future<void> _dialog(index, logs) async {
+    switch (index) {
+      case 0:
+        await showDialog(
+          context: context,
+          builder: (dialogContext) {
+            return StatefulBuilder(
+              builder: (dialogContext, setState) {
+                return AlertDialog(
+                  title: buildText(logs, index),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AppText("1 BHK"),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: buildTextFieldWidget(
+                              controller: _firstBhk1Controller,
+                              text: '1 time Service',
+                              hintText: '1 BHK',
+                            ),
+                          ),
+                          Expanded(
+                            child: buildTextFieldWidget(
+                              controller: secondBhk1Controller,
+                              text: '2 time Service',
+                              hintText: '1 BHK',
+                            ),
+                          ),
+                        ],
+                      ),
+                      AppText("2 BHK"),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: buildTextFieldWidget(
+                              controller: _firstBhk2Controller,
+                              text: '1 time Service',
+                              hintText: '2 BHK',
+                            ),
+                          ),
+                          Expanded(
+                            child: buildTextFieldWidget(
+                              controller: secondBhk2Controller,
+                              text: '2 time Service',
+                              hintText: '2 BHK',
+                            ),
+                          ),
+                        ],
+                      ),
+                      AppText("3 BHK"),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: buildTextFieldWidget(
+                              controller: _firstBhk3Controller,
+                              text: '1 time Service',
+                              hintText: '3 BHK',
+                            ),
+                          ),
+                          Expanded(
+                            child: buildTextFieldWidget(
+                              controller: secondBhk3Controller,
+                              text: '2 time Service',
+                              hintText: '3 BHK',
+                            ),
+                          ),
+                        ],
+                      ),
+                      AppText("4 BHK"),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: buildTextFieldWidget(
+                              controller: _firstBhk4Controller,
+                              text: '1 time Service',
+                              hintText: '4 BHK',
+                            ),
+                          ),
+                          Expanded(
+                            child: buildTextFieldWidget(
+                              controller: secondBhk4Controller,
+                              text: '2 time Service',
+                              hintText: '4 BHK',
+                            ),
+                          ),
+                        ],
+                      ),
+                      AppText("5 BHK"),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: buildTextFieldWidget(
+                              controller: _firstBhk5Controller,
+                              text: '1 time Service',
+                              hintText: '5 BHK',
+                            ),
+                          ),
+                          Expanded(
+                            child: buildTextFieldWidget(
+                              controller: secondBhk5Controller,
+                              text: '2 time Service',
+                              hintText: '5 BHK',
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      _addButtons(
+                        // id: logs[index]?.id ?? "",
+                        // serviceName: logs[index]?.serviceName ?? "",
+                        // imageUrl: logs[index]?.imageUrl ?? "",
+                        onPressed: () async {
+                          // if (widget.firstTimeService == null) {
+                          await BlocProvider.of<ServiceCubit>(context)
+                              .maidPriceService(
+                            context: context,
+                            // id: logs[index]?.id ?? "",
+                            maidService: MaidService(
+                              serviceName: "Maid Service",
+                              bhk1: _firstBhk1Controller.text,
+                              bhk2: _firstBhk2Controller.text,
+                              bhk3: _firstBhk3Controller.text,
+                              bhk4: _firstBhk4Controller.text,
+                              bhk5: _firstBhk5Controller.text,
+                              bhk1_2: secondBhk1Controller.text,
+                              bhk2_2: secondBhk2Controller.text,
+                              bhk3_2: secondBhk3Controller.text,
+                              bhk4_2: secondBhk4Controller.text,
+                              bhk5_2: secondBhk5Controller.text,
+                            ),
+                            // secondTimeServiceModel: SecondTimeServiceModel(
+                            //   bhk1: _firstBhk1Controller.text,
+                            //   bhk2: _firstBhk2Controller.text,
+                            //   bhk3: _firstBhk3Controller.text,
+                            //   bhk4: _firstBhk4Controller.text,
+                            //   bhk5: _firstBhk5Controller.text,
+                            // ),
+                            // imageUrl: logs[index]?.imageUrl ?? "",
+                            // serviceName: logs[index]?.serviceName ?? "",
+                            // ),
+                          );
+                          //Close the dialog box
+                          // } else {
+                          // await BlocProvider.of<ServiceCubit>(context).editService(
+                          //   context: context,
+                          //   service: ServiceModel(firstTimeService: FirstTimeService()),
+                          // );
+                          // }
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+        );
+        break;
+      // case 1:
+      //   await showDialog(
+      //     context: context,
+      //     builder: (dialogContext) {
+      //       return StatefulBuilder(
+      //         builder: (dialogContext, setState) {
+      //           return AlertDialog(
+      //             title: buildText(logs, index),
+      //             content: Column(
+      //               mainAxisSize: MainAxisSize.min,
+      //               children: [
+      //                 buildTextFieldWidget(
+      //                   controller: firstCook1Controller,
+      //                   text: '1 COOK',
+      //                   hintText: '1 COOK',
+      //                 ),
+      //                 buildTextFieldWidget(
+      //                   controller: firstCook2Controller,
+      //                   text: '2 COOK',
+      //                   hintText: '2 COOK',
+      //                 ),
+      //                 buildTextFieldWidget(
+      //                   controller: firstCook3Controller,
+      //                   text: '3 COOK',
+      //                   hintText: '3 COOK',
+      //                 ),
+      //                 buildTextFieldWidget(
+      //                   controller: firstCook4Controller,
+      //                   text: '4 COOK',
+      //                   hintText: '4 COOK',
+      //                 ),
+      //                 buildTextFieldWidget(
+      //                   controller: firstCook5Controller,
+      //                   text: '5 COOK',
+      //                   hintText: '5 COOK',
+      //                 ),
+      //                 buildTextFieldWidget(
+      //                   controller: firstCook6Controller,
+      //                   text: '6 COOK',
+      //                   hintText: '6 COOK',
+      //                 ),
+      //                 SizedBox(
+      //                   height: 2.h,
+      //                 ),
+      //                 _addButtons(
+      //                   // id: logs[index]?.id ?? "",
+      //                   // serviceName: logs[index]?.serviceName ?? "",
+      //                   // imageUrl: logs[index]?.imageUrl ?? "",
+      //                   onPressed: () async {
+      //                     if (widget.firstTimeService == null) {
+      //                       await BlocProvider.of<ServiceCubit>(context)
+      //                           .addCookPriceService(
+      //                         context: context,
+      //                         id: logs[index]?.id ?? "",
+      //                         serviceModel: ServiceModel(
+      //                           cookFirstServiceModel: CookFirstServiceModel(
+      //                             firstPerson1: firstCook1Controller.text,
+      //                             firstPerson2: firstCook2Controller.text,
+      //                             firstPerson3: firstCook3Controller.text,
+      //                             firstPerson4: firstCook4Controller.text,
+      //                             firstPerson5: firstCook5Controller.text,
+      //                             firstPerson6: firstCook6Controller.text,
+      //                           ),
+      //                           cookSecondTimeServiceModel:
+      //                               CookSecondTimeServiceModel(
+      //                             secondPerson1: firstCook1Controller.text,
+      //                             secondPerson2: firstCook2Controller.text,
+      //                             secondPerson3: firstCook3Controller.text,
+      //                             secondPerson4: firstCook4Controller.text,
+      //                             secondPerson5: firstCook5Controller.text,
+      //                             secondPerson6: firstCook6Controller.text,
+      //                           ),
+      //                           imageUrl: logs[index]?.imageUrl ?? "",
+      //                           serviceName: logs[index]?.serviceName ?? "",
+      //                         ),
+      //                       );
+      //                       //Close the dialog box
+      //                     } else {
+      //                       // await BlocProvider.of<ServiceCubit>(context).editService(
+      //                       //   context: context,
+      //                       //   service: ServiceModel(firstTimeService: FirstTimeService()),
+      //                       // );
+      //                     }
+      //                     Navigator.of(context).pop();
+      //                   },
+      //                 ),
+      //               ],
+      //             ),
+      //           );
+      //         },
+      //       );
+      //     },
+      //   );
+      //   break;
+      // case 2:
+      //   await showDialog(
+      //     context: context,
+      //     builder: (dialogContext) {
+      //       return StatefulBuilder(
+      //         builder: (dialogContext, setState) {
+      //           return AlertDialog(
+      //             title: buildText(logs, index),
+      //             content: Column(
+      //               mainAxisSize: MainAxisSize.min,
+      //               children: [
+      //                 buildTextFieldWidget(
+      //                   controller: driverSmallController,
+      //                   text: 'Small',
+      //                   hintText: 'Small',
+      //                 ),
+      //                 buildTextFieldWidget(
+      //                   controller: driverMediumController,
+      //                   text: 'Medium/Sedan',
+      //                   hintText: 'Medium/Sedan',
+      //                 ),
+      //                 buildTextFieldWidget(
+      //                   controller: driverSuvController,
+      //                   text: 'Compact SUV',
+      //                   hintText: 'Compact SUV',
+      //                 ),
+      //                 buildTextFieldWidget(
+      //                   controller: driver7SeaterController,
+      //                   text: 'SUV 7Seater',
+      //                   hintText: 'SUV 7Seater',
+      //                 ),
+      //                 buildTextFieldWidget(
+      //                   controller: driverCarsController,
+      //                   text: 'Luxury Cars',
+      //                   hintText: 'Luxury Cars',
+      //                 ),
+      //                 SizedBox(
+      //                   height: 2.h,
+      //                 ),
+      //                 _addButtons(
+      //                   id: logs[index]?.id ?? "",
+      //                   serviceName: logs[index]?.serviceName ?? "",
+      //                   imageUrl: logs[index]?.imageUrl ?? "",
+      //                   onPressed: () async {
+      //                     if (widget.firstTimeService == null) {
+      //                       await BlocProvider.of<ServiceCubit>(context)
+      //                           .addCookPriceService(
+      //                         context: context,
+      //                         id: logs[index]?.id ?? "",
+      //                         serviceModel: ServiceModel(
+      //                           driverModel: DriverModel(
+      //                             driverSmall: driverSmallController.text,
+      //                             driverMedium: driverMediumController.text,
+      //                             driverSuv: driverSuvController.text,
+      //                             driver7Seater: driver7SeaterController.text,
+      //                             driverCars: driverCarsController.text,
+      //                           ),
+      //                           imageUrl: logs[index]?.imageUrl ?? "",
+      //                           serviceName: logs[index]?.serviceName ?? "",
+      //                         ),
+      //                       );
+      //                       //Close the dialog box
+      //                     } else {
+      //                       // await BlocProvider.of<ServiceCubit>(context).editService(
+      //                       //   context: context,
+      //                       //   service: ServiceModel(firstTimeService: FirstTimeService()),
+      //                       // );
+      //                     }
+      //                     Navigator.of(context).pop();
+      //                   },
+      //                 ),
+      //               ],
+      //             ),
+      //           );
+      //         },
+      //       );
+      //     },
+      //   );
+      //   break;
+      // case 3:
+      //   await showDialog(
+      //     context: context,
+      //     builder: (dialogContext) {
+      //       return StatefulBuilder(
+      //         builder: (dialogContext, setState) {
+      //           return AlertDialog(
+      //             title: buildText(logs, index),
+      //             content: Column(
+      //               mainAxisSize: MainAxisSize.min,
+      //               children: [
+      //                 buildTextFieldWidget(
+      //                   controller: _firstBhk1Controller,
+      //                   text: '1 BHK',
+      //                   hintText: '1 BHK',
+      //                 ),
+      //                 buildTextFieldWidget(
+      //                   controller: _firstBhk2Controller,
+      //                   text: '2 BHK',
+      //                   hintText: '2 BHK',
+      //                 ),
+      //                 SizedBox(
+      //                   height: 2.h,
+      //                 ),
+      //                 _addButton,
+      //               ],
+      //             ),
+      //           );
+      //         },
+      //       );
+      //     },
+      //   );
+      //   break;
+      // case 4:
+      //   await showDialog(
+      //     context: context,
+      //     builder: (dialogContext) {
+      //       return StatefulBuilder(
+      //         builder: (dialogContext, setState) {
+      //           return AlertDialog(
+      //             title: buildText(logs, index),
+      //             content: Column(
+      //               mainAxisSize: MainAxisSize.min,
+      //               children: [
+      //                 buildTextFieldWidget(
+      //                   controller: _firstBhk1Controller,
+      //                   text: '1 BHK',
+      //                   hintText: '1 BHK',
+      //                 ),
+      //                 buildTextFieldWidget(
+      //                   controller: _firstBhk2Controller,
+      //                   text: '2 BHK',
+      //                   hintText: '2 BHK',
+      //                 ),
+      //                 SizedBox(
+      //                   height: 2.h,
+      //                 ),
+      //                 _addButton,
+      //               ],
+      //             ),
+      //           );
+      //         },
+      //       );
+      //     },
+      //   );
+      //   break;
+      // case 5:
+      //   await showDialog(
+      //     context: context,
+      //     builder: (dialogContext) {
+      //       return StatefulBuilder(
+      //         builder: (dialogContext, setState) {
+      //           return AlertDialog(
+      //             title: buildText(logs, index),
+      //             content: Column(
+      //               mainAxisSize: MainAxisSize.min,
+      //               children: [
+      //                 buildTextFieldWidget(
+      //                   controller: _firstBhk1Controller,
+      //                   text: '1 BHK',
+      //                   hintText: '1 BHK',
+      //                 ),
+      //                 buildTextFieldWidget(
+      //                   controller: _firstBhk2Controller,
+      //                   text: '2 BHK',
+      //                   hintText: '2 BHK',
+      //                 ),
+      //                 SizedBox(
+      //                   height: 2.h,
+      //                 ),
+      //                 _addButton,
+      //               ],
+      //             ),
+      //           );
+      //         },
+      //       );
+      //     },
+      //   );
+      //   break;
+      // default:
+      //   showDialog(
+      //     context: context,
+      //     builder: (dialogContext) {
+      //       return StatefulBuilder(
+      //         builder: (dialogContext, setState) {
+      //           return AlertDialog(
+      //             title: buildText(logs, index),
+      //             content: Column(
+      //               mainAxisSize: MainAxisSize.min,
+      //               children: [
+      //                 buildTextFieldWidget(
+      //                   controller: _firstBhk1Controller,
+      //                   text: '1 BHK',
+      //                   hintText: '1 BHK',
+      //                 ),
+      //                 buildTextFieldWidget(
+      //                   controller: _firstBhk2Controller,
+      //                   text: '2 BHK',
+      //                   hintText: '2 BHK',
+      //                 ),
+      //                 SizedBox(
+      //                   height: 2.h,
+      //                 ),
+      //                 _addButton,
+      //               ],
+      //             ),
+      //           );
+      //         },
+      //       );
+      //     },
+      //   );
+    }
   }
 }

@@ -2,21 +2,21 @@ class ServiceModel {
   String? id;
   String? imageUrl;
   String? serviceName;
-  FirstTimeServiceModel? firstTimeServiceModel;
-  SecondTimeServiceModel? secondTimeServiceModel;
-  CookFirstServiceModel? cookFirstServiceModel;
-  CookSecondTimeServiceModel? cookSecondTimeServiceModel;
-  DriverModel? driverModel;
+  // FirstTimeServiceModel? firstTimeServiceModel;
+  // SecondTimeServiceModel? secondTimeServiceModel;
+  // CookFirstServiceModel? cookFirstServiceModel;
+  // CookSecondTimeServiceModel? cookSecondTimeServiceModel;
+  // DriverModel? driverModel;
 
   ServiceModel({
     this.id,
     this.imageUrl,
     this.serviceName,
-    this.firstTimeServiceModel,
-    this.secondTimeServiceModel,
-    this.cookFirstServiceModel,
-    this.cookSecondTimeServiceModel,
-    this.driverModel,
+    // this.firstTimeServiceModel,
+    // this.secondTimeServiceModel,
+    // this.cookFirstServiceModel,
+    // this.cookSecondTimeServiceModel,
+    // this.driverModel,
   });
 
   Map<String, dynamic> toMap() {
@@ -24,11 +24,11 @@ class ServiceModel {
       'id': id,
       'imageUrl': imageUrl,
       'serviceName': serviceName,
-      'firstTimeServiceModel': firstTimeServiceModel?.toMap(),
-      'secondTimeServiceModel': secondTimeServiceModel?.toMap(),
-      'cookFirstServiceModel': cookFirstServiceModel?.toMap(),
-      'cookSecondTimeServiceModel': cookSecondTimeServiceModel?.toMap(),
-      'driverModel': driverModel?.toMap(),
+      // 'firstTimeServiceModel': firstTimeServiceModel?.toMap(),
+      // 'secondTimeServiceModel': secondTimeServiceModel?.toMap(),
+      // 'cookFirstServiceModel': cookFirstServiceModel?.toMap(),
+      // 'cookSecondTimeServiceModel': cookSecondTimeServiceModel?.toMap(),
+      // 'driverModel': driverModel?.toMap(),
     };
   }
 
@@ -37,93 +37,85 @@ class ServiceModel {
       id: map['id'],
       imageUrl: map['imageUrl'],
       serviceName: map['serviceName'] ?? '',
-      firstTimeServiceModel: map['firstTimeServiceModel'] == null
-          ? null
-          : FirstTimeServiceModel.fromMap(map['firstTimeServiceModel']),
-      secondTimeServiceModel: map['secondTimeServiceModel'] == null
-          ? null
-          : SecondTimeServiceModel.fromMap(map['secondTimeServiceModel']),
-      cookFirstServiceModel: map['cookFirstServiceModel'] == null
-          ? null
-          : CookFirstServiceModel.fromMap(map['cookFirstServiceModel']),
-      cookSecondTimeServiceModel: map['cookSecondTimeServiceModel'] == null
-          ? null
-          : CookSecondTimeServiceModel.fromMap(
-              map['cookSecondTimeServiceModel']),
-      driverModel: map['driverModel'] == null
-          ? null
-          : DriverModel.fromMap(map['driverModel']),
+      // firstTimeServiceModel: map['firstTimeServiceModel'] == null
+      //     ? null
+      // : FirstTimeServiceModel.fromMap(map['firstTimeServiceModel']),
+      // secondTimeServiceModel: map['secondTimeServiceModel'] == null
+      //     ? null
+      //     : SecondTimeServiceModel.fromMap(map['secondTimeServiceModel']),
+      // cookFirstServiceModel: map['cookFirstServiceModel'] == null
+      //     ? null
+      //     : CookFirstServiceModel.fromMap(map['cookFirstServiceModel']),
+      // cookSecondTimeServiceModel: map['cookSecondTimeServiceModel'] == null
+      //     ? null
+      //     : CookSecondTimeServiceModel.fromMap(
+      //         map['cookSecondTimeServiceModel']),
+      // driverModel: map['driverModel'] == null
+      //     ? null
+      //     : DriverModel.fromMap(map['driverModel']),
     );
   }
 }
 
-class FirstTimeServiceModel {
+class MaidService {
+  String? id;
+  String? serviceName;
   String? bhk1;
   String? bhk2;
   String? bhk3;
   String? bhk4;
   String? bhk5;
+  String? bhk1_2;
+  String? bhk2_2;
+  String? bhk3_2;
+  String? bhk4_2;
+  String? bhk5_2;
 
-  FirstTimeServiceModel({
+  MaidService({
+    this.id,
+    this.serviceName,
     this.bhk1,
     this.bhk2,
     this.bhk3,
     this.bhk4,
     this.bhk5,
+    this.bhk1_2,
+    this.bhk2_2,
+    this.bhk3_2,
+    this.bhk4_2,
+    this.bhk5_2,
   });
 
   Map<String, dynamic> toMap() {
     return {
+      "id": id,
+      "serviceName": serviceName,
       "bhk1": bhk1,
       "bhk2": bhk2,
       "bhk3": bhk3,
       "bhk4": bhk4,
       "bhk5": bhk5,
+      "bhk1_2": bhk1_2,
+      "bhk2_2": bhk2_2,
+      "bhk3_2": bhk3_2,
+      "bhk4_2": bhk4_2,
+      "bhk5_2": bhk5_2,
     };
   }
 
-  factory FirstTimeServiceModel.fromMap(Map<String, dynamic> map) =>
-      FirstTimeServiceModel(
+  factory MaidService.fromMap(Map<String, dynamic> map) => MaidService(
+        id: map["id"] ?? "",
+        serviceName: map["serviceName"] ?? "",
         bhk1: map["bhk1"] ?? "",
         bhk2: map["bhk2"] ?? "",
         bhk3: map["bhk3"] ?? "",
         bhk4: map["bhk4"] ?? "",
         bhk5: map["bhk5"] ?? "",
-      );
-}
-
-class SecondTimeServiceModel {
-  String? bhk1;
-  String? bhk2;
-  String? bhk3;
-  String? bhk4;
-  String? bhk5;
-
-  SecondTimeServiceModel({
-    this.bhk1,
-    this.bhk2,
-    this.bhk3,
-    this.bhk4,
-    this.bhk5,
-  });
-
-  Map<String, dynamic> toMap() {
-    return {
-      "bhk1": bhk1,
-      "bhk2": bhk2,
-      "bhk3": bhk3,
-      "bhk4": bhk4,
-      "bhk5": bhk5,
-    };
-  }
-
-  factory SecondTimeServiceModel.fromMap(Map<String, dynamic> map) =>
-      SecondTimeServiceModel(
-        bhk1: map["bhk1"] ?? "",
-        bhk2: map["bhk2"] ?? "",
-        bhk3: map["bhk3"] ?? "",
-        bhk4: map["bhk4"] ?? "",
-        bhk5: map["bhk5"] ?? "",
+        bhk1_2: map["bhk1_2"] ?? "",
+        bhk2_2: map["bhk2_2"] ?? "",
+        bhk3_2: map["bhk3_2"] ?? "",
+        bhk4_2: map["bhk4_2"] ?? "",
+        bhk5_2: map["bhk5_2"] ?? "",
       );
 }
 

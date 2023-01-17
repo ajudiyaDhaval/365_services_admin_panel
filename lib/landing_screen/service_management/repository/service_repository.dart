@@ -57,24 +57,29 @@ class ServiceRepository {
     return;
   }
 
-  Future<void> addPriceServiceToFirebase({
-    required ServiceModel serviceModel,
-    String? id,
+  /// maid
+  Future<void> maidPriceRepository({
+    required MaidService maidService,
   }) async {
     // print('Service');
     // print(service.serviceName);
-    final _serviceDocs =
-        _firebaseFirestore.collection(FirebasePath.service).doc();
-
+    final _serviceDocs = _firebaseFirestore
+        .collection(FirebasePath.servicePrice)
+        .doc()
+        .collection(FirebasePath.maid)
+        .doc();
+    maidService.id = _serviceDocs.id;
     await _firebaseFirestore
-        .collection(FirebasePath.service)
-        .doc(id)
-        .update(serviceModel.toMap());
+        .collection(FirebasePath.servicePrice)
+        .doc()
+        .collection(FirebasePath.maid)
+        .doc(_serviceDocs.id)
+        .set(maidService.toMap());
     return;
   }
 
   /// cook
-  Future<void> addCookPriceServiceToFirebase({
+  Future<void> cookPriceRepository({
     required ServiceModel serviceModel,
     String? id,
   }) async {

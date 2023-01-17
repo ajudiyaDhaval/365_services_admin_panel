@@ -16,6 +16,7 @@ import 'package:service365_admin_panel/utility/ui_color.dart';
 
 class AddCityDialogWidget extends StatefulWidget {
   final CityModel? cityModel;
+
   const AddCityDialogWidget({
     Key? key,
     this.cityModel,
@@ -30,6 +31,7 @@ class _AddCityDialogWidgetState extends State<AddCityDialogWidget> {
   final _cityNameController = TextEditingController();
   bool _isNameChanged = false;
   CityModel? _cityModel;
+
   @override
   void initState() {
     if (widget.cityModel != null) {
@@ -191,7 +193,8 @@ class _AddCityDialogWidgetState extends State<AddCityDialogWidget> {
                             children: [
                               Text(
                                 _cityModel!
-                                    .availableServices[index].serviceName ??"",
+                                        .availableServices[index].serviceName ??
+                                    "",
                                 style: _serviceTextFontStyle,
                               ),
                               IconButton(
@@ -320,9 +323,11 @@ class _AddCityDialogWidgetState extends State<AddCityDialogWidget> {
                                   checkColor: Colors.black,
                                   title: Text(
                                     _cityManagerCubit
-                                        .availableServiceWithCheckList[index]
-                                        .service
-                                        .serviceName??"",
+                                            .availableServiceWithCheckList[
+                                                index]
+                                            .service
+                                            .serviceName ??
+                                        "",
                                     style: _serviceTextFontStyle,
                                   ),
                                   value: _cityManagerCubit
@@ -358,4 +363,21 @@ class _AddCityDialogWidgetState extends State<AddCityDialogWidget> {
       ),
     );
   }
+}
+
+/// The typeface variant to use when drawing the letters (e.g., italics).
+
+Widget AppText(text
+    // double? fontSize,
+    // FontWeight? fontWeight,
+    // FontStyle? fontStyle,
+    ) {
+  return Text(text,
+      style: GoogleFonts.poppins(
+          textStyle: TextStyle(
+        color: BaseScreenColor.pageTitleTextfontColor,
+        // fontSize: ((ResponsiveWidget.isDesktop(context) ? 12 : 10)),
+        fontSize: 12.sp,
+        fontWeight: FontWeight.w600,
+      )));
 }

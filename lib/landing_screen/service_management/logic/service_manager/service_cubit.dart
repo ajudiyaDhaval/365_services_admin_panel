@@ -43,21 +43,20 @@ class ServiceCubit extends Cubit<ServiceState> {
     }
   }
 
-  Future<void> addPriceService({
+  /// maid
+  Future<void> maidPriceService({
     required BuildContext context,
-    required ServiceModel serviceModel,
-    String? id,
+    required MaidService maidService,
   }) async {
     emit(ShowLoadingSpinner());
     try {
-      await _serviceRepository.addPriceServiceToFirebase(
-        serviceModel: serviceModel,
-        id: id,
+      await _serviceRepository.maidPriceRepository(
+        maidService: maidService,
       );
       emit(ServiceInitial());
       ShowSnackBar.showSnackBar(
         context,
-        "'${serviceModel.serviceName}' successfully added to service",
+        "'${maidService.serviceName}' successfully added to service",
         textAlign: TextAlign.center,
       );
       return;
@@ -65,7 +64,7 @@ class ServiceCubit extends Cubit<ServiceState> {
       emit(ServiceInitial());
       ShowSnackBar.showSnackBar(
         context,
-        "Unable to add '${serviceModel.serviceName}' to service",
+        "Unable to add '${maidService.serviceName}' to service",
         textAlign: TextAlign.center,
       );
       return;
@@ -73,14 +72,14 @@ class ServiceCubit extends Cubit<ServiceState> {
   }
 
   /// cook
-  Future<void> addCookPriceService({
+  Future<void> cookPriceService({
     required BuildContext context,
     required ServiceModel serviceModel,
     String? id,
   }) async {
     emit(ShowLoadingSpinner());
     try {
-      await _serviceRepository.addCookPriceServiceToFirebase(
+      await _serviceRepository.cookPriceRepository(
         serviceModel: serviceModel,
         id: id,
       );

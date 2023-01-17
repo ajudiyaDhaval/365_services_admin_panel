@@ -11,14 +11,16 @@ class TextFieldWidget extends StatelessWidget {
   final TextInputType keyboardType;
   final int? maxLength;
   final Widget? suffixIcon;
+  final String? labelText;
   final bool obscureText;
   final String? hintText;
   final String? Function(String?)? validator;
   const TextFieldWidget({
     Key? key,
     required this.controller,
+    this.labelText,
     this.autofillHints,
-    required this.text,
+    this.text = "",
     required this.textInputAction,
     required this.keyboardType,
     this.maxLength,
@@ -56,6 +58,7 @@ class TextFieldWidget extends StatelessWidget {
       style: _textFieldContentStyle,
       controller: controller,
       decoration: InputDecoration(
+        labelText: labelText,
         contentPadding: EdgeInsets.symmetric(
           // horizontal: _deviceSize.width *
           //     (ResponsiveWidget.isMobile(context) ? 0.04 : 0.02),
