@@ -72,6 +72,66 @@ class ServiceCubit extends Cubit<ServiceState> {
     }
   }
 
+  /// cook
+  Future<void> addCookPriceService({
+    required BuildContext context,
+    required ServiceModel serviceModel,
+    String? id,
+  }) async {
+    emit(ShowLoadingSpinner());
+    try {
+      await _serviceRepository.addCookPriceServiceToFirebase(
+        serviceModel: serviceModel,
+        id: id,
+      );
+      emit(ServiceInitial());
+      ShowSnackBar.showSnackBar(
+        context,
+        "'${serviceModel.serviceName}' successfully added to service",
+        textAlign: TextAlign.center,
+      );
+      return;
+    } catch (e) {
+      emit(ServiceInitial());
+      ShowSnackBar.showSnackBar(
+        context,
+        "Unable to add '${serviceModel.serviceName}' to service",
+        textAlign: TextAlign.center,
+      );
+      return;
+    }
+  }
+
+  /// driver
+  Future<void> addDriverPriceService({
+    required BuildContext context,
+    required ServiceModel serviceModel,
+    String? id,
+  }) async {
+    emit(ShowLoadingSpinner());
+    try {
+      await _serviceRepository.addDriverPriceServiceToFirebase(
+        serviceModel: serviceModel,
+        id: id,
+      );
+      emit(ServiceInitial());
+      ShowSnackBar.showSnackBar(
+        context,
+        "'${serviceModel.serviceName}' successfully added to service",
+        textAlign: TextAlign.center,
+      );
+      return;
+    } catch (e) {
+      emit(ServiceInitial());
+      ShowSnackBar.showSnackBar(
+        context,
+        "Unable to add '${serviceModel.serviceName}' to service",
+        textAlign: TextAlign.center,
+      );
+      return;
+    }
+  }
+
   Future<void> editService({
     required BuildContext context,
     required ServiceModel service,
@@ -102,7 +162,8 @@ class ServiceCubit extends Cubit<ServiceState> {
     }
   }
 
-  Future<void> deleteService({required BuildContext context, required ServiceModel service}) async {
+  Future<void> deleteService(
+      {required BuildContext context, required ServiceModel service}) async {
     emit(ShowLoadingSpinner());
     try {
       await _serviceRepository.deleteServiceFromFirebase(

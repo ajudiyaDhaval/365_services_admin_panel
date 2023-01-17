@@ -13,8 +13,12 @@ class ServiceRepository {
     required String serviceId,
   }) async {
     //image upload to firebase
-    final _ref = FirebaseStorage.instance.ref().child('service_images').child(serviceId + '.jpg');
-    await _ref.putData(serviceImage.readAsBytes!, SettableMetadata(contentType: 'image/jpeg'));
+    final _ref = FirebaseStorage.instance
+        .ref()
+        .child('service_images')
+        .child(serviceId + '.jpg');
+    await _ref.putData(
+        serviceImage.readAsBytes!, SettableMetadata(contentType: 'image/jpeg'));
     final _imageUrl = await _ref.getDownloadURL();
     return _imageUrl;
   }
@@ -23,7 +27,10 @@ class ServiceRepository {
     required String serviceId,
   }) async {
     //image upload to firebase
-    final _ref = FirebaseStorage.instance.ref().child('service_images').child(serviceId + '.jpg');
+    final _ref = FirebaseStorage.instance
+        .ref()
+        .child('service_images')
+        .child(serviceId + '.jpg');
     await _ref.delete();
     return;
   }
@@ -34,7 +41,8 @@ class ServiceRepository {
   }) async {
     // print('Service');
     // print(service.serviceName);
-    final _serviceDocs = _firebaseFirestore.collection(FirebasePath.service).doc();
+    final _serviceDocs =
+        _firebaseFirestore.collection(FirebasePath.service).doc();
 
     final _imageUrl = await _uploadServiceImage(
       serviceImage: pickedImage,
@@ -42,7 +50,10 @@ class ServiceRepository {
     );
     service.imageUrl = _imageUrl;
     service.id = _serviceDocs.id;
-    await _firebaseFirestore.collection(FirebasePath.service).doc(_serviceDocs.id).set(service.toMap());
+    await _firebaseFirestore
+        .collection(FirebasePath.service)
+        .doc(_serviceDocs.id)
+        .set(service.toMap());
     return;
   }
 
@@ -52,7 +63,8 @@ class ServiceRepository {
   }) async {
     // print('Service');
     // print(service.serviceName);
-    final _serviceDocs = _firebaseFirestore.collection(FirebasePath.service).doc();
+    final _serviceDocs =
+        _firebaseFirestore.collection(FirebasePath.service).doc();
 
     await _firebaseFirestore
         .collection(FirebasePath.service)
@@ -61,15 +73,55 @@ class ServiceRepository {
     return;
   }
 
-  Future<void> deleteServiceFromFirebase({required ServiceModel service}) async {
+  /// cook
+  Future<void> addCookPriceServiceToFirebase({
+    required ServiceModel serviceModel,
+    String? id,
+  }) async {
+    // print('Service');
+    // print(service.serviceName);
+    final _serviceDocs =
+        _firebaseFirestore.collection(FirebasePath.service).doc();
+
+    await _firebaseFirestore
+        .collection(FirebasePath.service)
+        .doc(id)
+        .update(serviceModel.toMap());
+    return;
+  }
+
+  /// driver
+  Future<void> addDriverPriceServiceToFirebase({
+    required ServiceModel serviceModel,
+    String? id,
+  }) async {
+    // print('Service');
+    // print(service.serviceName);
+    final _serviceDocs =
+        _firebaseFirestore.collection(FirebasePath.service).doc();
+
+    await _firebaseFirestore
+        .collection(FirebasePath.service)
+        .doc(id)
+        .update(serviceModel.toMap());
+    return;
+  }
+
+  Future<void> deleteServiceFromFirebase(
+      {required ServiceModel service}) async {
     await _deleteServiceImage(serviceId: service.id!);
-    await _firebaseFirestore.collection(FirebasePath.service).doc(service.id).delete();
+    await _firebaseFirestore
+        .collection(FirebasePath.service)
+        .doc(service.id)
+        .delete();
     return;
   }
 
   Future<List<CityModel>> fetchAvailableCity() async =>
       await _firebaseFirestore.collection(FirebasePath.city).get().then(
-            (response) => response.docs.map((doc) => CityModel.fromMap(doc.data())).toList(),
+            (response) => response.docs
+                .map((doc) => CityModel.fromMap(doc.data()))
+                .toList(),
           );
 
   Future<void> editServiceToFirebase({
@@ -84,7 +136,10 @@ class ServiceRepository {
       );
       service.imageUrl = _imageUrl;
     }
-    await _firebaseFirestore.collection(FirebasePath.service).doc(service.id).update(
+    await _firebaseFirestore
+        .collection(FirebasePath.service)
+        .doc(service.id)
+        .update(
           service.toMap(),
         );
 
@@ -94,16 +149,21 @@ class ServiceRepository {
       for (var city in _cityList) {
         for (var servicemodel in city.availableServices) {
           bool _updateData = false;
-          if (servicemodel.id == service.id && servicemodel.imageUrl != service.imageUrl) {
+          if (servicemodel.id == service.id &&
+              servicemodel.imageUrl != service.imageUrl) {
             servicemodel.imageUrl = service.imageUrl;
             _updateData = true;
           }
-          if (servicemodel.id == service.id && servicemodel.serviceName != service.serviceName) {
+          if (servicemodel.id == service.id &&
+              servicemodel.serviceName != service.serviceName) {
             servicemodel.serviceName = service.serviceName;
             _updateData = true;
           }
           if (_updateData) {
-            _firebaseFirestore.collection(FirebasePath.city).doc(city.id).update(city.toMap(cityId: city.id!));
+            _firebaseFirestore
+                .collection(FirebasePath.city)
+                .doc(city.id)
+                .update(city.toMap(cityId: city.id!));
           }
         }
       }
@@ -116,7 +176,9 @@ class ServiceRepository {
       return _firebaseFirestore
           .collection(FirebasePath.service)
           .snapshots()
-          .map((snaps) => snaps.docs.map((doc) => ServiceModel.fromMap(doc.data())).toList());
+          .map((snaps) => snaps.docs
+              .map((doc) => ServiceModel.fromMap(doc.data()))
+              .toList());
     } catch (error) {
       // print('Error getting stream of service ${error.toString()}');
       rethrow;
