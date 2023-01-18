@@ -37,6 +37,8 @@ class C {
   static final acswitch_box_installationController = TextEditingController();
   static final switch_board_installationController = TextEditingController();
   static final switch_board_repairController = TextEditingController();
+  static final switch_or_socket_controller = TextEditingController();
+  static final switch_box_15Amp_controller = TextEditingController();
 
   static final celling_regulator_fan_replacementController =
       TextEditingController();

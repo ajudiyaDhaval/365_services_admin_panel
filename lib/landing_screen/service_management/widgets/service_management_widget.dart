@@ -1124,6 +1124,16 @@ class _ServiceManagementState extends State<ServiceManagement> {
                           hintText: 'Switch Board Repair',
                         ),
                         buildTextFieldWidget(
+                          controller: C.switch_or_socket_controller,
+                          text: 'Switch & Socket Replacement',
+                          hintText: 'Switch & Socket Replacement',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.switch_box_15Amp_controller,
+                          text: '15 + Amp Switch Box',
+                          hintText: '15 + Amp Switch Box',
+                        ),
+                        buildTextFieldWidget(
                           controller:
                               C.celling_regulator_fan_replacementController,
                           text: 'Celling Regulator Fan Replacement',
@@ -1150,51 +1160,52 @@ class _ServiceManagementState extends State<ServiceManagement> {
                               context: context,
                               electricianService: ElectricianService(
                                 serviceName: "Electrician_Service",
-                                fan: FAN(
-                                  celling_fan_installation: C
-                                          .celling_fan_installationController
-                                          .text
-                                          .isEmpty
-                                      ? ""
-                                      : C.celling_fan_installationController
-                                          .text,
-                                  celling_regulator_fan_replacement: C
-                                          .celling_regulator_fan_replacementController
-                                          .text
-                                          .isEmpty
-                                      ? ""
-                                      : C.celling_regulator_fan_replacementController
-                                          .text,
-                                  decorative_celling_fan_installation: C
-                                          .decorative_celling_fan_installationController
-                                          .text
-                                          .isEmpty
-                                      ? ""
-                                      : C.decorative_celling_fan_installationController
-                                          .text,
-                                ),
-                                switchAndSocket: SwitchAndSocket(
-                                  acswitch_box_installation: C
-                                          .acswitch_box_installationController
-                                          .text
-                                          .isEmpty
-                                      ? ""
-                                      : C.acswitch_box_installationController
-                                          .text,
-                                  switch_board_installation: C
-                                          .switch_board_installationController
-                                          .text
-                                          .isEmpty
-                                      ? ""
-                                      : C.switch_board_installationController
-                                          .text,
-                                  switch_board_repair: C
-                                          .switch_board_repairController
-                                          .text
-                                          .isEmpty
-                                      ? ""
-                                      : C.switch_board_repairController.text,
-                                ),
+                                celling_fan_installation: C
+                                        .celling_fan_installationController
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.celling_fan_installationController.text,
+                                celling_regulator_fan_replacement: C
+                                        .celling_regulator_fan_replacementController
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.celling_regulator_fan_replacementController
+                                        .text,
+                                decorative_celling_fan_installation: C
+                                        .decorative_celling_fan_installationController
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.decorative_celling_fan_installationController
+                                        .text,
+                                acswitch_box_installation: C
+                                        .acswitch_box_installationController
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.acswitch_box_installationController
+                                        .text,
+                                switch_board_installation: C
+                                        .switch_board_installationController
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.switch_board_installationController
+                                        .text,
+                                switch_board_repair:
+                                    C.switch_board_repairController.text.isEmpty
+                                        ? ""
+                                        : C.switch_board_repairController.text,
+                                switch_or_socket_replacement:
+                                    C.switch_or_socket_controller.text.isEmpty
+                                        ? ""
+                                        : C.switch_or_socket_controller.text,
+                                switch_box_15Amp:
+                                    C.switch_box_15Amp_controller.text.isEmpty
+                                        ? ""
+                                        : C.switch_box_15Amp_controller.text,
                               ),
                             );
 
@@ -1257,44 +1268,37 @@ class _ServiceManagementState extends State<ServiceManagement> {
                               context: context,
                               plumberService: PlumberService(
                                 serviceName: "Plumber_Service",
-                                basinAndSink: BasinAndSink(
-                                  waste_pipe_leakage_1piece: C
-                                          .waste_pipe_leakage_Controller
-                                          .text
-                                          .isEmpty
-                                      ? ""
-                                      : C.waste_pipe_leakage_Controller.text,
-                                  waste_pipe_blockge_removal: C
-                                          .waste_pipe_blockge_removal_Controller
-                                          .text
-                                          .isEmpty
-                                      ? ""
-                                      : C.waste_pipe_blockge_removal_Controller
-                                          .text,
-                                  wash_basin_installation: C
-                                          .wash_basin_installation_Controller
-                                          .text
-                                          .isEmpty
-                                      ? ""
-                                      : C.wash_basin_installation_Controller
-                                          .text,
-                                ),
-                                grouting: Grouting(
-                                  bathroom_tile_gap_filling: C
-                                          .bathroom_tile_gap_filling_Controller
-                                          .text
-                                          .isEmpty
-                                      ? ""
-                                      : C.bathroom_tile_gap_filling_Controller
-                                          .text,
-                                  kithen_title_gap_filling: C
-                                          .kithen_title_gap_filling_Controller
-                                          .text
-                                          .isEmpty
-                                      ? ""
-                                      : C.kithen_title_gap_filling_Controller
-                                          .text,
-                                ),
+                                waste_pipe_leakage_1piece:
+                                    C.waste_pipe_leakage_Controller.text.isEmpty
+                                        ? ""
+                                        : C.waste_pipe_leakage_Controller.text,
+                                waste_pipe_blockge_removal: C
+                                        .waste_pipe_blockge_removal_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.waste_pipe_blockge_removal_Controller
+                                        .text,
+                                wash_basin_installation: C
+                                        .wash_basin_installation_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.wash_basin_installation_Controller.text,
+                                bathroom_tile_gap_filling: C
+                                        .bathroom_tile_gap_filling_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.bathroom_tile_gap_filling_Controller
+                                        .text,
+                                kithen_title_gap_filling: C
+                                        .kithen_title_gap_filling_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.kithen_title_gap_filling_Controller
+                                        .text,
                               ),
                             );
                             Navigator.of(context).pop();

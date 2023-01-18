@@ -1,8 +1,17 @@
 class ElectricianService {
   String? id;
   String? serviceName;
-  SwitchAndSocket? switchAndSocket;
-  FAN? fan;
+  String? acswitch_box_installation;
+  String? switch_board_installation;
+  String? switch_board_repair;
+  String? celling_regulator_fan_replacement;
+  String? decorative_celling_fan_installation;
+  String? celling_fan_installation;
+  String? switch_or_socket_replacement;
+  String? switch_box_15Amp;
+
+  // SwitchAndSocket? switchAndSocket;
+  // FAN? fan;
   // CookFirstServiceModel? cookFirstServiceModel;
   // CookSecondTimeServiceModel? cookSecondTimeServiceModel;
   // DriverModel? driverModel;
@@ -10,8 +19,16 @@ class ElectricianService {
   ElectricianService({
     this.id,
     this.serviceName,
-    this.switchAndSocket,
-    this.fan,
+    this.acswitch_box_installation,
+    this.switch_board_installation,
+    this.switch_board_repair,
+    this.celling_regulator_fan_replacement,
+    this.decorative_celling_fan_installation,
+    this.celling_fan_installation,
+    this.switch_or_socket_replacement,
+    this.switch_box_15Amp,
+    // this.switchAndSocket,
+    // this.fan,
     // this.cookFirstServiceModel,
     // this.cookSecondTimeServiceModel,
     // this.driverModel,
@@ -21,8 +38,17 @@ class ElectricianService {
     return {
       'id': id,
       'serviceName': serviceName,
-      'switchAndSocket': switchAndSocket?.toMap(),
-      'fan': fan?.toMap(),
+      'acSwitchBoxInstallation': acswitch_box_installation,
+      'switch_board_installation': switch_board_installation,
+      'switch_board_repair': switch_board_repair,
+      'acSwitchBoxInstallation': acswitch_box_installation,
+      'switch_board_installation': switch_board_installation,
+      'switch_board_repair': switch_board_repair,
+      'switch_or_socket_replacement': switch_or_socket_replacement,
+      'switch_box_15Amp': switch_box_15Amp,
+
+      // 'switchAndSocket': switchAndSocket?.toMap(),
+      // 'fan': fan?.toMap(),
       // 'cookFirstServiceModel': cookFirstServiceModel?.toMap(),
       // 'cookSecondTimeServiceModel': cookSecondTimeServiceModel?.toMap(),
       // 'driverModel': driverModel?.toMap(),
@@ -33,12 +59,23 @@ class ElectricianService {
     return ElectricianService(
       id: map['id'],
       serviceName: map['serviceName'] ?? '',
-      switchAndSocket: map['switchAndSocket'] == {}
-          ? null
-          : SwitchAndSocket.fromMap(map['switchAndSocket']),
-      fan: map['fan'] == null
-          ? null
-          : FAN.fromMap(map['secondTimeServiceModel']),
+      acswitch_box_installation: map['acswitch_box_installation'],
+      switch_board_installation: map['switch_board_installation'],
+      switch_board_repair: map['switch_board_repair'],
+      celling_regulator_fan_replacement:
+          map['celling_regulator_fan_replacement'],
+      decorative_celling_fan_installation:
+          map['decorative_celling_fan_installation'],
+      celling_fan_installation: map['celling_fan_installation'],
+      switch_or_socket_replacement: map['switch_or_socket_replacement'],
+      switch_box_15Amp: map['switch_box_15Amp'],
+
+      // switchAndSocket: map['switchAndSocket'] == {}
+      //     ? null
+      //     : SwitchAndSocket.fromMap(map['switchAndSocket']),
+      // fan: map['fan'] == null
+      //     ? null
+      //     : FAN.fromMap(map['secondTimeServiceModel']),
       // cookFirstServiceModel: map['cookFirstServiceModel'] == null
       //     ? null
       //     : CookFirstServiceModel.fromMap(map['cookFirstServiceModel']),
