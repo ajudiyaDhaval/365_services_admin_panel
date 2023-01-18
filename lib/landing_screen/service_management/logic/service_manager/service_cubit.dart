@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:service365_admin_panel/landing_screen/service_management/model/electrician_modal.dart';
+import 'package:service365_admin_panel/landing_screen/service_management/model/plumber_modal.dart';
 import 'package:service365_admin_panel/landing_screen/service_management/model/service_model.dart';
 import 'package:service365_admin_panel/landing_screen/service_management/repository/service_repository.dart';
 import 'package:service365_admin_panel/utility/image_picker.dart';
@@ -121,6 +123,62 @@ class ServiceCubit extends Cubit<ServiceState> {
       ShowSnackBar.showSnackBar(
         context,
         "Unable to add '${driverService.serviceName}' to service",
+        textAlign: TextAlign.center,
+      );
+      return;
+    }
+  }
+
+  /// electrician
+  Future<void> electricianPriceService({
+    required BuildContext context,
+    required ElectricianService electricianService,
+  }) async {
+    emit(ShowLoadingSpinner());
+    try {
+      await _serviceRepository.electricianPriceRepository(
+        electricianService: electricianService,
+      );
+      emit(ServiceInitial());
+      ShowSnackBar.showSnackBar(
+        context,
+        "'${electricianService.serviceName}' successfully added to service",
+        textAlign: TextAlign.center,
+      );
+      return;
+    } catch (e) {
+      emit(ServiceInitial());
+      ShowSnackBar.showSnackBar(
+        context,
+        "Unable to add '${electricianService.serviceName}' to service",
+        textAlign: TextAlign.center,
+      );
+      return;
+    }
+  }
+
+  /// plumber
+  Future<void> plumberPriceService({
+    required BuildContext context,
+    required PlumberService plumberService,
+  }) async {
+    emit(ShowLoadingSpinner());
+    try {
+      await _serviceRepository.plumberPriceRepository(
+        plumberService: plumberService,
+      );
+      emit(ServiceInitial());
+      ShowSnackBar.showSnackBar(
+        context,
+        "'${plumberService.serviceName}' successfully added to service",
+        textAlign: TextAlign.center,
+      );
+      return;
+    } catch (e) {
+      emit(ServiceInitial());
+      ShowSnackBar.showSnackBar(
+        context,
+        "Unable to add '${plumberService.serviceName}' to service",
         textAlign: TextAlign.center,
       );
       return;

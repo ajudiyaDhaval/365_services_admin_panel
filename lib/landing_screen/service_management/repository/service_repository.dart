@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:service365_admin_panel/config/firebase_table_name.dart';
 import 'package:service365_admin_panel/landing_screen/service_management/model/city_model.dart';
+import 'package:service365_admin_panel/landing_screen/service_management/model/electrician_modal.dart';
+import 'package:service365_admin_panel/landing_screen/service_management/model/plumber_modal.dart';
 import 'package:service365_admin_panel/landing_screen/service_management/model/service_model.dart';
 import 'package:service365_admin_panel/utility/image_picker.dart';
 
@@ -119,6 +121,50 @@ class ServiceRepository {
         .collection(FirebasePath.driver)
         .doc(_serviceDocs.id)
         .set(driverService.toMap());
+    return;
+  }
+
+  /// electrician
+  Future<void> electricianPriceRepository({
+    required ElectricianService electricianService,
+  }) async {
+    // print('Service');
+    // print(service.serviceName);
+    final _serviceDocs = _firebaseFirestore
+        .collection(FirebasePath.servicePrice)
+        .doc()
+        .collection(FirebasePath.electrician)
+        .doc();
+    electricianService.id = _serviceDocs.id;
+
+    await _firebaseFirestore
+        .collection(FirebasePath.servicePrice)
+        .doc()
+        .collection(FirebasePath.electrician)
+        .doc(electricianService.id)
+        .set(electricianService.toMap());
+    return;
+  }
+
+  /// plumber
+  Future<void> plumberPriceRepository({
+    required PlumberService plumberService,
+  }) async {
+    // print('Service');
+    // print(service.serviceName);
+    final _serviceDocs = _firebaseFirestore
+        .collection(FirebasePath.servicePrice)
+        .doc()
+        .collection(FirebasePath.plumber)
+        .doc();
+    plumberService.id = _serviceDocs.id;
+
+    await _firebaseFirestore
+        .collection(FirebasePath.servicePrice)
+        .doc()
+        .collection(FirebasePath.plumber)
+        .doc(plumberService.id)
+        .set(plumberService.toMap());
     return;
   }
 

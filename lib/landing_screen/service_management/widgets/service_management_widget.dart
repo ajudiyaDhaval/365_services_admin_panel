@@ -8,9 +8,12 @@ import 'package:service365_admin_panel/landing_screen/service_management/logic/c
 import 'package:service365_admin_panel/landing_screen/service_management/logic/pick_service_image/pick_service_image_cubit.dart';
 import 'package:service365_admin_panel/landing_screen/service_management/logic/service_manager/service_cubit.dart';
 import 'package:service365_admin_panel/landing_screen/service_management/model/city_model.dart';
+import 'package:service365_admin_panel/landing_screen/service_management/model/electrician_modal.dart';
+import 'package:service365_admin_panel/landing_screen/service_management/model/plumber_modal.dart';
 import 'package:service365_admin_panel/landing_screen/service_management/model/service_model.dart';
 import 'package:service365_admin_panel/landing_screen/service_management/widgets/add_city_dialog.dart';
 import 'package:service365_admin_panel/landing_screen/service_management/widgets/add_service_dialog.dart';
+import 'package:service365_admin_panel/landing_screen/service_management/widgets/controller.dart';
 import 'package:service365_admin_panel/tools/responsive_handler.dart';
 import 'package:service365_admin_panel/utility/spinloading_indicator.dart';
 
@@ -359,89 +362,13 @@ class ServiceManagement extends StatefulWidget {
 }
 
 class _ServiceManagementState extends State<ServiceManagement> {
-  final _firstBhk1Controller = TextEditingController();
-  final _firstBhk2Controller = TextEditingController();
-  final _firstBhk3Controller = TextEditingController();
-  final _firstBhk4Controller = TextEditingController();
-  final _firstBhk5Controller = TextEditingController();
-  final secondBhk1Controller = TextEditingController();
-  final secondBhk2Controller = TextEditingController();
-  final secondBhk3Controller = TextEditingController();
-  final secondBhk4Controller = TextEditingController();
-  final secondBhk5Controller = TextEditingController();
-
-  // cook
-  final firstCook1Controller = TextEditingController();
-  final firstCook2Controller = TextEditingController();
-  final firstCook3Controller = TextEditingController();
-  final firstCook4Controller = TextEditingController();
-  final firstCook5Controller = TextEditingController();
-  final firstCook6Controller = TextEditingController();
-  final secondCook1Controller = TextEditingController();
-  final secondCook2Controller = TextEditingController();
-  final secondCook3Controller = TextEditingController();
-  final secondCook4Controller = TextEditingController();
-  final secondCook5Controller = TextEditingController();
-  final secondCook6Controller = TextEditingController();
-
-  // driver
-  final driverSmallController = TextEditingController();
-  final driverMediumController = TextEditingController();
-  final driverSuvController = TextEditingController();
-  final driver7SeaterController = TextEditingController();
-  final driverCarsController = TextEditingController();
-
-  // Future<void> _submit({
-  //   String? id,
-  //   String? imageUrl,
-  //   String? serviceName,
-  // }) async {
-  //   if (widget.firstTimeService == null) {
-  //     await BlocProvider.of<ServiceCubit>(context).maidPriceService(
-  //       context: context,
-  //       serviceModel: ServiceModel(
-  //         firstTimeServiceModel: FirstTimeServiceModel(
-  //           bhk1: _firstBhk1Controller.text,
-  //           bhk2: _firstBhk2Controller.text,
-  //           bhk3: _firstBhk3Controller.text,
-  //           bhk4: _firstBhk4Controller.text,
-  //           bhk5: _firstBhk5Controller.text,
-  //         ),
-  //         secondTimeServiceModel: SecondTimeServiceModel(
-  //           bhk1: _firstBhk1Controller.text,
-  //           bhk2: _firstBhk2Controller.text,
-  //           bhk3: _firstBhk3Controller.text,
-  //           bhk4: _firstBhk4Controller.text,
-  //           bhk5: _firstBhk5Controller.text,
-  //         ),
-  //         id: id,
-  //         imageUrl: imageUrl,
-  //         serviceName: serviceName,
-  //       ),
-  //     );
-  //     //Close the dialog box
-  //   } else {
-  //     // await BlocProvider.of<ServiceCubit>(context).editService(
-  //     //   context: context,
-  //     //   service: ServiceModel(firstTimeService: FirstTimeService()),
-  //     // );
-  //   }
-  //   Navigator.of(context).pop();
-  // }
-
   Widget _addButtons({
-    // String? id,
-    // String? imageUrl,
-    // String? serviceName,
     VoidCallback? onPressed,
   }) {
     return ElevatedButton(
       child: const Text('Add'),
       style: ButtonStyle(
         padding: MaterialStateProperty.all(EdgeInsets.symmetric(
-          // horizontal: _deviceSize.width *
-          //     (ResponsiveWidget.isMobile(context) ? 0.1 : 0.05),
-          // vertical: _deviceSize.height * 0.02,
           horizontal: 80.w,
           vertical: 10.h,
         )),
@@ -455,44 +382,12 @@ class _ServiceManagementState extends State<ServiceManagement> {
             MaterialStateProperty.all(UiColors.logInButtonForeground),
         textStyle: MaterialStateProperty.all(ServiceManagement.textStyle),
       ),
-      // onPressed: () async {
-      //   await _submit(
-      //     id: id,
-      //     imageUrl: imageUrl,
-      //     serviceName: serviceName,
-      //   );
-      // },
       onPressed: onPressed,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final _addButton = ElevatedButton(
-      child: const Text('Add'),
-      style: ButtonStyle(
-        padding: MaterialStateProperty.all(EdgeInsets.symmetric(
-          // horizontal: _deviceSize.width *
-          //     (ResponsiveWidget.isMobile(context) ? 0.1 : 0.05),
-          // vertical: _deviceSize.height * 0.02,
-          horizontal: 80.w,
-          vertical: 10.h,
-        )),
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        backgroundColor: MaterialStateProperty.all(UiColors.themeColor),
-        foregroundColor:
-            MaterialStateProperty.all(UiColors.logInButtonForeground),
-        textStyle: MaterialStateProperty.all(ServiceManagement.textStyle),
-      ),
-      onPressed: () async {
-        //   await _submit();
-      },
-    );
-
     return Container(
       color: Colors.black45,
       // width: _deviceSize.width *
@@ -581,7 +476,8 @@ class _ServiceManagementState extends State<ServiceManagement> {
                                 onTap: () async {
                                   print('=====$index');
                                   print('=====${logs[index]?.id}');
-                                  _dialog(index, logs);
+                                  _dialog(
+                                      logs[index]?.serviceName, index, logs);
                                 },
                                 child: Row(
                                     mainAxisAlignment:
@@ -705,42 +601,9 @@ class _ServiceManagementState extends State<ServiceManagement> {
     );
   }
 
-  Text buildText(List<ServiceModel?> logs, int index) {
-    return Text(
-      '${logs[index]?.serviceName ?? 'N/A'} Service',
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 15.sp,
-      ),
-    );
-  }
-
-  Widget buildTextFieldWidget({
-    TextEditingController? controller,
-    String? text,
-    String? hintText,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 13),
-      child: TextFieldWidget(
-        controller: controller!,
-        labelText: text ?? "",
-        hintText: hintText,
-        textInputAction: TextInputAction.next,
-        keyboardType: TextInputType.text,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return "Field can't be empty";
-          }
-          return null;
-        },
-      ),
-    );
-  }
-
-  Future<void> _dialog(index, logs) async {
-    switch (index) {
-      case 0:
+  Future<void> _dialog(String? serviceName, index, logs) async {
+    switch (serviceName) {
+      case "maid":
         await showDialog(
           context: context,
           builder: (dialogContext) {
@@ -758,7 +621,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                           children: [
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: _firstBhk1Controller,
+                                controller: C.firstBhk1Controller,
                                 text: '1 time Service',
                                 hintText: '1 BHK',
                               ),
@@ -768,7 +631,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                             ),
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: secondBhk1Controller,
+                                controller: C.secondBhk1Controller,
                                 text: '2 time Service',
                                 hintText: '1 BHK',
                               ),
@@ -780,7 +643,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                           children: [
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: _firstBhk2Controller,
+                                controller: C.firstBhk2Controller,
                                 text: '1 time Service',
                                 hintText: '2 BHK',
                               ),
@@ -790,7 +653,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                             ),
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: secondBhk2Controller,
+                                controller: C.secondBhk2Controller,
                                 text: '2 time Service',
                                 hintText: '2 BHK',
                               ),
@@ -802,7 +665,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                           children: [
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: _firstBhk3Controller,
+                                controller: C.firstBhk3Controller,
                                 text: '1 time Service',
                                 hintText: '3 BHK',
                               ),
@@ -812,7 +675,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                             ),
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: secondBhk3Controller,
+                                controller: C.secondBhk3Controller,
                                 text: '2 time Service',
                                 hintText: '3 BHK',
                               ),
@@ -824,7 +687,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                           children: [
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: _firstBhk4Controller,
+                                controller: C.firstBhk4Controller,
                                 text: '1 time Service',
                                 hintText: '4 BHK',
                               ),
@@ -834,7 +697,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                             ),
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: secondBhk4Controller,
+                                controller: C.secondBhk4Controller,
                                 text: '2 time Service',
                                 hintText: '4 BHK',
                               ),
@@ -846,7 +709,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                           children: [
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: _firstBhk5Controller,
+                                controller: C.firstBhk5Controller,
                                 text: '1 time Service',
                                 hintText: '5 BHK',
                               ),
@@ -856,7 +719,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                             ),
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: secondBhk5Controller,
+                                controller: C.secondBhk5Controller,
                                 text: '2 time Service',
                                 hintText: '5 BHK',
                               ),
@@ -878,36 +741,36 @@ class _ServiceManagementState extends State<ServiceManagement> {
                               // id: logs[index]?.id ?? "",
                               maidService: MaidService(
                                 serviceName: "Maid_Service",
-                                bhk1: _firstBhk1Controller.text.isEmpty
+                                bhk1: C.firstBhk1Controller.text.isEmpty
                                     ? ""
-                                    : _firstBhk1Controller.text,
-                                bhk2: _firstBhk2Controller.text.isEmpty
+                                    : C.firstBhk1Controller.text,
+                                bhk2: C.firstBhk2Controller.text.isEmpty
                                     ? ""
-                                    : _firstBhk2Controller.text,
-                                bhk3: _firstBhk3Controller.text.isEmpty
+                                    : C.firstBhk2Controller.text,
+                                bhk3: C.firstBhk3Controller.text.isEmpty
                                     ? ""
-                                    : _firstBhk3Controller.text,
-                                bhk4: _firstBhk4Controller.text.isEmpty
+                                    : C.firstBhk3Controller.text,
+                                bhk4: C.firstBhk4Controller.text.isEmpty
                                     ? ""
-                                    : _firstBhk4Controller.text,
-                                bhk5: _firstBhk5Controller.text.isEmpty
+                                    : C.firstBhk4Controller.text,
+                                bhk5: C.firstBhk5Controller.text.isEmpty
                                     ? ""
-                                    : _firstBhk5Controller.text,
-                                bhk1_2: secondBhk1Controller.text.isEmpty
+                                    : C.firstBhk5Controller.text,
+                                bhk1_2: C.secondBhk1Controller.text.isEmpty
                                     ? ""
-                                    : secondBhk1Controller.text,
-                                bhk2_2: secondBhk2Controller.text.isEmpty
+                                    : C.secondBhk1Controller.text,
+                                bhk2_2: C.secondBhk2Controller.text.isEmpty
                                     ? ""
-                                    : secondBhk2Controller.text,
-                                bhk3_2: secondBhk3Controller.text.isEmpty
+                                    : C.secondBhk2Controller.text,
+                                bhk3_2: C.secondBhk3Controller.text.isEmpty
                                     ? ""
-                                    : secondBhk3Controller.text,
-                                bhk4_2: secondBhk4Controller.text.isEmpty
+                                    : C.secondBhk3Controller.text,
+                                bhk4_2: C.secondBhk4Controller.text.isEmpty
                                     ? ""
-                                    : secondBhk4Controller.text,
-                                bhk5_2: secondBhk5Controller.text.isEmpty
+                                    : C.secondBhk4Controller.text,
+                                bhk5_2: C.secondBhk5Controller.text.isEmpty
                                     ? ""
-                                    : secondBhk5Controller.text,
+                                    : C.secondBhk5Controller.text,
                               ),
                             );
                             Navigator.of(context).pop();
@@ -922,7 +785,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
           },
         );
         break;
-      case 1:
+      case "cook":
         await showDialog(
           context: context,
           builder: (dialogContext) {
@@ -940,7 +803,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                           children: [
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: firstCook1Controller,
+                                controller: C.firstCook1Controller,
                                 text: '1 time Service',
                                 hintText: '1 Person',
                               ),
@@ -950,7 +813,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                             ),
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: secondCook1Controller,
+                                controller: C.secondCook1Controller,
                                 text: '2 time Service',
                                 hintText: '2 Person',
                               ),
@@ -962,7 +825,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                           children: [
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: firstCook2Controller,
+                                controller: C.firstCook2Controller,
                                 text: '1 time Service',
                                 hintText: '2 Person',
                               ),
@@ -972,7 +835,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                             ),
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: secondCook2Controller,
+                                controller: C.secondCook2Controller,
                                 text: '2 time Service',
                                 hintText: '2 Person',
                               ),
@@ -984,7 +847,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                           children: [
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: firstCook3Controller,
+                                controller: C.firstCook3Controller,
                                 text: '1 time Service',
                                 hintText: '3 Person',
                               ),
@@ -994,7 +857,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                             ),
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: secondCook3Controller,
+                                controller: C.secondCook3Controller,
                                 text: '2 time Service',
                                 hintText: '3 Person',
                               ),
@@ -1006,7 +869,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                           children: [
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: firstCook4Controller,
+                                controller: C.firstCook4Controller,
                                 text: '1 time Service',
                                 hintText: '4 Person',
                               ),
@@ -1016,7 +879,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                             ),
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: secondCook4Controller,
+                                controller: C.secondCook4Controller,
                                 text: '2 time Service',
                                 hintText: '4 Person',
                               ),
@@ -1028,7 +891,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                           children: [
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: firstCook5Controller,
+                                controller: C.firstCook5Controller,
                                 text: '1 time Service',
                                 hintText: '5 Person',
                               ),
@@ -1038,7 +901,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                             ),
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: secondCook5Controller,
+                                controller: C.secondCook5Controller,
                                 text: '2 time Service',
                                 hintText: '5 Person',
                               ),
@@ -1050,7 +913,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                           children: [
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: firstCook6Controller,
+                                controller: C.firstCook6Controller,
                                 text: '1 time Service',
                                 hintText: '6 Person',
                               ),
@@ -1060,7 +923,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                             ),
                             Expanded(
                               child: buildTextFieldWidget(
-                                controller: secondCook6Controller,
+                                controller: C.secondCook6Controller,
                                 text: '2 time Service',
                                 hintText: '6 Person',
                               ),
@@ -1082,53 +945,53 @@ class _ServiceManagementState extends State<ServiceManagement> {
                               cookService: CookService(
                                 serviceName: "Cook_Service",
                                 person_1_1time:
-                                    firstCook1Controller.text.isEmpty
+                                    C.firstCook1Controller.text.isEmpty
                                         ? ""
-                                        : firstCook1Controller.text,
+                                        : C.firstCook1Controller.text,
                                 person_2_1time:
-                                    firstCook2Controller.text.isEmpty
+                                    C.firstCook2Controller.text.isEmpty
                                         ? ""
-                                        : firstCook2Controller.text,
+                                        : C.firstCook2Controller.text,
                                 person_3_1time:
-                                    firstCook3Controller.text.isEmpty
+                                    C.firstCook3Controller.text.isEmpty
                                         ? ""
-                                        : firstCook3Controller.text,
+                                        : C.firstCook3Controller.text,
                                 person_4_1time:
-                                    firstCook4Controller.text.isEmpty
+                                    C.firstCook4Controller.text.isEmpty
                                         ? ""
-                                        : firstCook4Controller.text,
+                                        : C.firstCook4Controller.text,
                                 person_5_1time:
-                                    firstCook5Controller.text.isEmpty
+                                    C.firstCook5Controller.text.isEmpty
                                         ? ""
-                                        : firstCook5Controller.text,
+                                        : C.firstCook5Controller.text,
                                 person_6_1time:
-                                    firstCook6Controller.text.isEmpty
+                                    C.firstCook6Controller.text.isEmpty
                                         ? ""
-                                        : firstCook6Controller.text,
+                                        : C.firstCook6Controller.text,
                                 person_1_2time:
-                                    secondCook1Controller.text.isEmpty
+                                    C.secondCook1Controller.text.isEmpty
                                         ? ""
-                                        : secondCook1Controller.text,
+                                        : C.secondCook1Controller.text,
                                 person_2_2time:
-                                    secondCook2Controller.text.isEmpty
+                                    C.secondCook2Controller.text.isEmpty
                                         ? ""
-                                        : secondCook2Controller.text,
+                                        : C.secondCook2Controller.text,
                                 person_3_2time:
-                                    secondCook3Controller.text.isEmpty
+                                    C.secondCook3Controller.text.isEmpty
                                         ? ""
-                                        : secondCook3Controller.text,
+                                        : C.secondCook3Controller.text,
                                 person_4_2time:
-                                    secondCook4Controller.text.isEmpty
+                                    C.secondCook4Controller.text.isEmpty
                                         ? ""
-                                        : secondCook4Controller.text,
+                                        : C.secondCook4Controller.text,
                                 person_5_2time:
-                                    secondCook5Controller.text.isEmpty
+                                    C.secondCook5Controller.text.isEmpty
                                         ? ""
-                                        : secondCook5Controller.text,
+                                        : C.secondCook5Controller.text,
                                 person_6_2time:
-                                    secondCook6Controller.text.isEmpty
+                                    C.secondCook6Controller.text.isEmpty
                                         ? ""
-                                        : secondCook6Controller.text,
+                                        : C.secondCook6Controller.text,
                               ),
                             );
                             //Close the dialog box
@@ -1148,7 +1011,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
           },
         );
         break;
-      case 2:
+      case "driver":
         await showDialog(
           context: context,
           builder: (dialogContext) {
@@ -1161,27 +1024,27 @@ class _ServiceManagementState extends State<ServiceManagement> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         buildTextFieldWidget(
-                          controller: driverSmallController,
+                          controller: C.driverSmallController,
                           text: 'Small',
                           hintText: 'Small',
                         ),
                         buildTextFieldWidget(
-                          controller: driverMediumController,
+                          controller: C.driverMediumController,
                           text: 'Medium/Sedan',
                           hintText: 'Medium/Sedan',
                         ),
                         buildTextFieldWidget(
-                          controller: driverSuvController,
+                          controller: C.driverSuvController,
                           text: 'Compact SUV',
                           hintText: 'Compact SUV',
                         ),
                         buildTextFieldWidget(
-                          controller: driver7SeaterController,
+                          controller: C.driver7SeaterController,
                           text: 'SUV 7Seater',
                           hintText: 'SUV 7Seater',
                         ),
                         buildTextFieldWidget(
-                          controller: driverCarsController,
+                          controller: C.driverCarsController,
                           text: 'Luxury Cars',
                           hintText: 'Luxury Cars',
                         ),
@@ -1196,25 +1059,25 @@ class _ServiceManagementState extends State<ServiceManagement> {
                               driverService: DriverService(
                                   serviceName: "Driver_Service",
                                   driverSmall:
-                                      driverSmallController.text.isEmpty
+                                      C.driverSmallController.text.isEmpty
                                           ? ""
-                                          : driverSmallController.text,
+                                          : C.driverSmallController.text,
                                   driverMediumAndSedan:
-                                      driverMediumController.text.isEmpty
+                                      C.driverMediumController.text.isEmpty
                                           ? ""
-                                          : driverMediumController.text,
+                                          : C.driverMediumController.text,
                                   driverCompactSuv:
-                                      driverSuvController.text.isEmpty
+                                      C.driverSuvController.text.isEmpty
                                           ? ""
-                                          : driverSuvController.text,
+                                          : C.driverSuvController.text,
                                   driver7Seater:
-                                      driver7SeaterController.text.isEmpty
+                                      C.driver7SeaterController.text.isEmpty
                                           ? ""
-                                          : driver7SeaterController.text,
+                                          : C.driver7SeaterController.text,
                                   driverLuxuryCars:
-                                      driverCarsController.text.isEmpty
+                                      C.driverCarsController.text.isEmpty
                                           ? ""
-                                          : driverCarsController.text),
+                                          : C.driverCarsController.text),
                             );
                             //Close the dialog box
                             // await BlocProvider.of<ServiceCubit>(context).editService(
@@ -1233,72 +1096,219 @@ class _ServiceManagementState extends State<ServiceManagement> {
           },
         );
         break;
-      // case 3:
-      //   await showDialog(
-      //     context: context,
-      //     builder: (dialogContext) {
-      //       return StatefulBuilder(
-      //         builder: (dialogContext, setState) {
-      //           return AlertDialog(
-      //             title: buildText(logs, index),
-      //             content: Column(
-      //               mainAxisSize: MainAxisSize.min,
-      //               children: [
-      //                 buildTextFieldWidget(
-      //                   controller: _firstBhk1Controller,
-      //                   text: '1 BHK',
-      //                   hintText: '1 BHK',
-      //                 ),
-      //                 buildTextFieldWidget(
-      //                   controller: _firstBhk2Controller,
-      //                   text: '2 BHK',
-      //                   hintText: '2 BHK',
-      //                 ),
-      //                 SizedBox(
-      //                   height: 2.h,
-      //                 ),
-      //                 _addButton,
-      //               ],
-      //             ),
-      //           );
-      //         },
-      //       );
-      //     },
-      //   );
-      //   break;
-      // case 4:
-      //   await showDialog(
-      //     context: context,
-      //     builder: (dialogContext) {
-      //       return StatefulBuilder(
-      //         builder: (dialogContext, setState) {
-      //           return AlertDialog(
-      //             title: buildText(logs, index),
-      //             content: Column(
-      //               mainAxisSize: MainAxisSize.min,
-      //               children: [
-      //                 buildTextFieldWidget(
-      //                   controller: _firstBhk1Controller,
-      //                   text: '1 BHK',
-      //                   hintText: '1 BHK',
-      //                 ),
-      //                 buildTextFieldWidget(
-      //                   controller: _firstBhk2Controller,
-      //                   text: '2 BHK',
-      //                   hintText: '2 BHK',
-      //                 ),
-      //                 SizedBox(
-      //                   height: 2.h,
-      //                 ),
-      //                 _addButton,
-      //               ],
-      //             ),
-      //           );
-      //         },
-      //       );
-      //     },
-      //   );
-      //   break;
+      case "electrician":
+        await showDialog(
+          context: context,
+          builder: (dialogContext) {
+            return StatefulBuilder(
+              builder: (dialogContext, setState) {
+                return AlertDialog(
+                  title: buildText(logs, index),
+                  content: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        buildTextFieldWidget(
+                          controller: C.acswitch_box_installationController,
+                          text: 'Ac Switch Box installation',
+                          hintText: 'Ac Switch Box',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.switch_board_installationController,
+                          text: 'Switch Board Installation',
+                          hintText: 'Switch Board',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.switch_board_repairController,
+                          text: 'Switch Board Repair',
+                          hintText: 'Switch Board Repair',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.celling_regulator_fan_replacementController,
+                          text: 'Celling Regulator Fan Replacement',
+                          hintText: 'Regulator Replacement',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.decorative_celling_fan_installationController,
+                          text: 'Decorative Celling Fan Installation',
+                          hintText: 'Decorative Fan Installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.celling_fan_installationController,
+                          text: 'Celling Fan Installation',
+                          hintText: 'Fan Installation ',
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        _addButtons(
+                          onPressed: () async {
+                            await BlocProvider.of<ServiceCubit>(context)
+                                .electricianPriceService(
+                              context: context,
+                              electricianService: ElectricianService(
+                                serviceName: "Electrician_Service",
+                                fan: FAN(
+                                  celling_fan_installation: C
+                                          .celling_fan_installationController
+                                          .text
+                                          .isEmpty
+                                      ? ""
+                                      : C.celling_fan_installationController
+                                          .text,
+                                  celling_regulator_fan_replacement: C
+                                          .celling_regulator_fan_replacementController
+                                          .text
+                                          .isEmpty
+                                      ? ""
+                                      : C.celling_regulator_fan_replacementController
+                                          .text,
+                                  decorative_celling_fan_installation: C
+                                          .decorative_celling_fan_installationController
+                                          .text
+                                          .isEmpty
+                                      ? ""
+                                      : C.decorative_celling_fan_installationController
+                                          .text,
+                                ),
+                                switchAndSocket: SwitchAndSocket(
+                                  acswitch_box_installation: C
+                                          .acswitch_box_installationController
+                                          .text
+                                          .isEmpty
+                                      ? ""
+                                      : C.acswitch_box_installationController
+                                          .text,
+                                  switch_board_installation: C
+                                          .switch_board_installationController
+                                          .text
+                                          .isEmpty
+                                      ? ""
+                                      : C.switch_board_installationController
+                                          .text,
+                                  switch_board_repair: C
+                                          .switch_board_repairController
+                                          .text
+                                          .isEmpty
+                                      ? ""
+                                      : C.switch_board_repairController.text,
+                                ),
+                              ),
+                            );
+
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        );
+        break;
+      case "plumber":
+        await showDialog(
+          context: context,
+          builder: (dialogContext) {
+            return StatefulBuilder(
+              builder: (dialogContext, setState) {
+                return AlertDialog(
+                  title: buildText(logs, index),
+                  content: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        buildTextFieldWidget(
+                          controller: C.waste_pipe_leakage_Controller,
+                          text: 'Waste Pipe Leakage (1 piece)',
+                          hintText: 'Pipe Leakage',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.waste_pipe_blockge_removal_Controller,
+                          text: 'Waste Pipe Blockge Removal',
+                          hintText: 'Waste Pipe Blockge Removal',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.wash_basin_installation_Controller,
+                          text: 'Wash Basin Installation',
+                          hintText: 'Wash Basin Installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.bathroom_tile_gap_filling_Controller,
+                          text: 'Bathroom Tile Gap Filling',
+                          hintText: 'Bathroom Tile Gap Filling',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.kithen_title_gap_filling_Controller,
+                          text: 'Kithen Tile Gap Filling',
+                          hintText: 'Kithen Tile Gap Filling',
+                        ),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        _addButtons(
+                          onPressed: () async {
+                            await BlocProvider.of<ServiceCubit>(context)
+                                .plumberPriceService(
+                              context: context,
+                              plumberService: PlumberService(
+                                serviceName: "Plumber_Service",
+                                basinAndSink: BasinAndSink(
+                                  waste_pipe_leakage_1piece: C
+                                          .waste_pipe_leakage_Controller
+                                          .text
+                                          .isEmpty
+                                      ? ""
+                                      : C.waste_pipe_leakage_Controller.text,
+                                  waste_pipe_blockge_removal: C
+                                          .waste_pipe_blockge_removal_Controller
+                                          .text
+                                          .isEmpty
+                                      ? ""
+                                      : C.waste_pipe_blockge_removal_Controller
+                                          .text,
+                                  wash_basin_installation: C
+                                          .wash_basin_installation_Controller
+                                          .text
+                                          .isEmpty
+                                      ? ""
+                                      : C.wash_basin_installation_Controller
+                                          .text,
+                                ),
+                                grouting: Grouting(
+                                  bathroom_tile_gap_filling: C
+                                          .bathroom_tile_gap_filling_Controller
+                                          .text
+                                          .isEmpty
+                                      ? ""
+                                      : C.bathroom_tile_gap_filling_Controller
+                                          .text,
+                                  kithen_title_gap_filling: C
+                                          .kithen_title_gap_filling_Controller
+                                          .text
+                                          .isEmpty
+                                      ? ""
+                                      : C.kithen_title_gap_filling_Controller
+                                          .text,
+                                ),
+                              ),
+                            );
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        );
+        break;
       // case 5:
       //   await showDialog(
       //     context: context,
@@ -1316,7 +1326,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
       //                   hintText: '1 BHK',
       //                 ),
       //                 buildTextFieldWidget(
-      //                   controller: _firstBhk2Controller,
+      //                   controller: firstBhk2Controller,
       //                   text: '2 BHK',
       //                   hintText: '2 BHK',
       //                 ),
@@ -1349,7 +1359,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
       //                   hintText: '1 BHK',
       //                 ),
       //                 buildTextFieldWidget(
-      //                   controller: _firstBhk2Controller,
+      //                   controller: firstBhk2Controller,
       //                   text: '2 BHK',
       //                   hintText: '2 BHK',
       //                 ),
@@ -1365,5 +1375,38 @@ class _ServiceManagementState extends State<ServiceManagement> {
       //     },
       //   );
     }
+  }
+
+  Text buildText(List<ServiceModel?> logs, int index) {
+    return Text(
+      '${logs[index]?.serviceName ?? 'N/A'} Service',
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 15.sp,
+      ),
+    );
+  }
+
+  Widget buildTextFieldWidget({
+    TextEditingController? controller,
+    String? text,
+    String? hintText,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 13),
+      child: TextFieldWidget(
+        controller: controller!,
+        labelText: text ?? "",
+        hintText: hintText,
+        textInputAction: TextInputAction.next,
+        keyboardType: TextInputType.text,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "Field can't be empty";
+          }
+          return null;
+        },
+      ),
+    );
   }
 }

@@ -1,3 +1,13 @@
+class ServiceCheckListModel {
+  final ServiceModel service;
+  bool isChecked;
+
+  ServiceCheckListModel({
+    required this.service,
+    this.isChecked = false,
+  });
+}
+
 class ServiceModel {
   String? id;
   String? imageUrl;
@@ -229,14 +239,4 @@ class DriverService {
         driver7Seater: map["driver7Seater"] ?? "",
         driverLuxuryCars: map["driverLuxuryCars"] ?? "",
       );
-}
-
-class ServiceCheckListModel {
-  final ServiceModel service;
-  bool isChecked;
-
-  ServiceCheckListModel({
-    required this.service,
-    this.isChecked = false,
-  });
 }
