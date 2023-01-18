@@ -2,6 +2,8 @@ class FirebasePath {
   static const String service = 'service';
   static const String servicePrice = 'servicePrice';
   static const String maid = 'Maid';
+  static const String cook = 'Cook';
+  static const String driver = 'Driver';
   static const String city = 'city';
   static const String discount = 'discount';
   static const String adv = 'advertisement';

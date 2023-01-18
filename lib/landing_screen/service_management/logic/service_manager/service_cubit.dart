@@ -74,19 +74,17 @@ class ServiceCubit extends Cubit<ServiceState> {
   /// cook
   Future<void> cookPriceService({
     required BuildContext context,
-    required ServiceModel serviceModel,
-    String? id,
+    required CookService cookService,
   }) async {
     emit(ShowLoadingSpinner());
     try {
       await _serviceRepository.cookPriceRepository(
-        serviceModel: serviceModel,
-        id: id,
+        cookService: cookService,
       );
       emit(ServiceInitial());
       ShowSnackBar.showSnackBar(
         context,
-        "'${serviceModel.serviceName}' successfully added to service",
+        "'${cookService.serviceName}' successfully added to service",
         textAlign: TextAlign.center,
       );
       return;
@@ -94,7 +92,7 @@ class ServiceCubit extends Cubit<ServiceState> {
       emit(ServiceInitial());
       ShowSnackBar.showSnackBar(
         context,
-        "Unable to add '${serviceModel.serviceName}' to service",
+        "Unable to add '${cookService.serviceName}' to service",
         textAlign: TextAlign.center,
       );
       return;
@@ -102,21 +100,19 @@ class ServiceCubit extends Cubit<ServiceState> {
   }
 
   /// driver
-  Future<void> addDriverPriceService({
+  Future<void> driverPriceService({
     required BuildContext context,
-    required ServiceModel serviceModel,
-    String? id,
+    required DriverService driverService,
   }) async {
     emit(ShowLoadingSpinner());
     try {
-      await _serviceRepository.addDriverPriceServiceToFirebase(
-        serviceModel: serviceModel,
-        id: id,
+      await _serviceRepository.driverPriceRepository(
+        driverService: driverService,
       );
       emit(ServiceInitial());
       ShowSnackBar.showSnackBar(
         context,
-        "'${serviceModel.serviceName}' successfully added to service",
+        "'${driverService.serviceName}' successfully added to service",
         textAlign: TextAlign.center,
       );
       return;
@@ -124,7 +120,7 @@ class ServiceCubit extends Cubit<ServiceState> {
       emit(ServiceInitial());
       ShowSnackBar.showSnackBar(
         context,
-        "Unable to add '${serviceModel.serviceName}' to service",
+        "Unable to add '${driverService.serviceName}' to service",
         textAlign: TextAlign.center,
       );
       return;

@@ -80,35 +80,45 @@ class ServiceRepository {
 
   /// cook
   Future<void> cookPriceRepository({
-    required ServiceModel serviceModel,
-    String? id,
+    required CookService cookService,
   }) async {
     // print('Service');
     // print(service.serviceName);
-    final _serviceDocs =
-        _firebaseFirestore.collection(FirebasePath.service).doc();
+    final _serviceDocs = _firebaseFirestore
+        .collection(FirebasePath.servicePrice)
+        .doc()
+        .collection(FirebasePath.cook)
+        .doc();
+    cookService.id = _serviceDocs.id;
 
     await _firebaseFirestore
-        .collection(FirebasePath.service)
-        .doc(id)
-        .update(serviceModel.toMap());
+        .collection(FirebasePath.servicePrice)
+        .doc()
+        .collection(FirebasePath.cook)
+        .doc(_serviceDocs.id)
+        .set(cookService.toMap());
     return;
   }
 
   /// driver
-  Future<void> addDriverPriceServiceToFirebase({
-    required ServiceModel serviceModel,
-    String? id,
+  Future<void> driverPriceRepository({
+    required DriverService driverService,
   }) async {
     // print('Service');
     // print(service.serviceName);
-    final _serviceDocs =
-        _firebaseFirestore.collection(FirebasePath.service).doc();
+    final _serviceDocs = _firebaseFirestore
+        .collection(FirebasePath.servicePrice)
+        .doc()
+        .collection(FirebasePath.driver)
+        .doc();
+    driverService.id = _serviceDocs.id;
 
     await _firebaseFirestore
-        .collection(FirebasePath.service)
-        .doc(id)
-        .update(serviceModel.toMap());
+        .collection(FirebasePath.servicePrice)
+        .doc()
+        .collection(FirebasePath.driver)
+        .doc(_serviceDocs.id)
+        .set(driverService.toMap());
     return;
   }
 
