@@ -603,7 +603,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
 
   Future<void> _dialog(String? serviceName, index, logs) async {
     switch (serviceName) {
-      case "maid":
+      case "Maid":
         await showDialog(
           context: context,
           builder: (dialogContext) {
@@ -785,7 +785,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
           },
         );
         break;
-      case "cook":
+      case "Cook":
         await showDialog(
           context: context,
           builder: (dialogContext) {
@@ -1011,7 +1011,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
           },
         );
         break;
-      case "driver":
+      case "Driver":
         await showDialog(
           context: context,
           builder: (dialogContext) {
@@ -1096,7 +1096,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
           },
         );
         break;
-      case "electrician":
+      case "Electrician":
         await showDialog(
           context: context,
           builder: (dialogContext) {
@@ -1210,7 +1210,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
           },
         );
         break;
-      case "plumber":
+      case "Plumber":
         await showDialog(
           context: context,
           builder: (dialogContext) {
