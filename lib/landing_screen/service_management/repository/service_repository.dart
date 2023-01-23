@@ -72,8 +72,8 @@ class ServiceRepository {
         .doc();
     maidService.id = _serviceDocs.id;
     await _firebaseFirestore
-        .collection(FirebasePath.servicePrice)
-        .doc()
+        // .collection(FirebasePath.servicePrice)
+        // .doc()
         .collection(FirebasePath.maid)
         .doc(_serviceDocs.id)
         .set(maidService.toMap());
