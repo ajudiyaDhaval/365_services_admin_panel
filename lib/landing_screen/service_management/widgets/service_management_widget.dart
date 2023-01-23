@@ -1150,6 +1150,151 @@ class _ServiceManagementState extends State<ServiceManagement> {
                           text: 'Celling Fan Installation',
                           hintText: 'Fan Installation ',
                         ),
+                        buildTextFieldWidget(
+                          controller: C.fan_repairController,
+                          text: 'Fan repair ',
+                          hintText: 'Fan repair ',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.fan_replacementController,
+                          text: 'Fan replacement ',
+                          hintText: 'Fan replacement ',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.fan_uninstallationController,
+                          text: 'Fan uninstalla',
+                          hintText: 'Fan uninstalla',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.bulbs_installationController,
+                          text: 'Bulbs installation',
+                          hintText: 'Bulbs installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.bulb_holder_installationController,
+                          text: 'Bulb holder installation',
+                          hintText: 'Bulb holder installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.false_celling_light_installationController,
+                          text: 'False celling light installation',
+                          hintText: 'False celling light installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.tube_light_installationController,
+                          text: 'Tube light installation',
+                          hintText: 'Tube light installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.fancy_light_installationController,
+                          text: 'Fancy light installation',
+                          hintText: 'Fancy light installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.phase_changeover_switch_installationController,
+                          text: '3 phase changeover switch installation ',
+                          hintText: '3 phase changeover switch installation ',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.MCB_fuse_replacementController,
+                          text: 'MCB fuse replacement',
+                          hintText: 'MCB fuse replacement',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.Single_pole_MCB_installationController,
+                          text: 'Single pole MCB installation',
+                          hintText: 'Single pole MCB installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.Sub_meter_installationController,
+                          text: 'Sub meter installation',
+                          hintText: 'Sub meter installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.Single_phase_phase_panelController,
+                          text: 'Single phase/3 phase panel',
+                          hintText: 'Single phase/3 phase panel',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.single_battery_inverter_installation_Controller,
+                          text: 'single_battery_inverter',
+                          hintText: 'single_battery_inverter',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.double_battery_inverter_installation_Controller,
+                          text: 'double_battery_inverter',
+                          hintText: 'double_battery_inverter',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.inverter_fuse_replacement_Controller,
+                          text: 'inverter_fuse_replacement',
+                          hintText: 'inverter_fuse_replacement',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.inverter_servicin_Controller,
+                          text: 'inverter_servicin',
+                          hintText: 'inverter_servicin',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.stabilizer_installation_Controller,
+                          text: 'stabilizer_installation',
+                          hintText: 'stabilizer_installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.TV_installation_up_Controller,
+                          text: 'TV_installation_up',
+                          hintText: 'TV_installation_up',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.TV_installation_above_Controller,
+                          text: 'TV_installation_above',
+                          hintText: 'TV_installation_above',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.TV_uninstallation_Controller,
+                          text: 'TV_uninstallation',
+                          hintText: 'TV_uninstallation',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.mini_home_theatre_installation_Controller,
+                          text: 'mini_home_theatre',
+                          hintText: 'mini_home_theatre',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.room_heater_repair_Controller,
+                          text: 'room_heater_repair',
+                          hintText: 'room_heater_repair',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.new_internal_wiring_Controller,
+                          text: 'new_internal_wiring',
+                          hintText: 'new_internal_wiring',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.new_wiring_with_casing_Controller,
+                          text: 'new_wiring_with_casing',
+                          hintText: 'new_wiring_with_casing',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.new_wiring_without_casing_Controller,
+                          text: 'new_wiring_without_casing',
+                          hintText: 'new_wiring_without_casing',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.doorbell_installation_Controller,
+                          text: 'doorbell_installation',
+                          hintText: 'doorbell_installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.doorbell_replacement_Controller,
+                          text: 'doorbell_replacement',
+                          hintText: 'doorbell_replacement',
+                        ),
                         SizedBox(
                           height: 2.h,
                         ),
@@ -1206,6 +1351,165 @@ class _ServiceManagementState extends State<ServiceManagement> {
                                     C.switch_box_15Amp_controller.text.isEmpty
                                         ? ""
                                         : C.switch_box_15Amp_controller.text,
+                                fan_repair: C.fan_repairController.text.isEmpty
+                                    ? ""
+                                    : C.fan_repairController.text,
+                                fan_replacement:
+                                    C.fan_replacementController.text.isEmpty
+                                        ? ""
+                                        : C.fan_replacementController.text,
+                                fan_uninstallation:
+                                    C.fan_uninstallationController.text.isEmpty
+                                        ? ""
+                                        : C.fan_uninstallationController.text,
+                                bulbs_installation:
+                                    C.bulbs_installationController.text.isEmpty
+                                        ? ""
+                                        : C.bulbs_installationController.text,
+                                bulb_holder_installation: C
+                                        .bulb_holder_installationController
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.bulb_holder_installationController.text,
+                                false_celling_light_installation: C
+                                        .false_celling_light_installationController
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.false_celling_light_installationController
+                                        .text,
+                                tube_light_installation: C
+                                        .tube_light_installationController
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.tube_light_installationController.text,
+                                fancy_light_installation: C
+                                        .phase_changeover_switch_installationController
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.phase_changeover_switch_installationController
+                                        .text,
+                                phase_changeover_switch_installation: C
+                                        .fancy_light_installationController
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.fancy_light_installationController.text,
+                                MCB_fuse_replacement: C
+                                        .MCB_fuse_replacementController
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.MCB_fuse_replacementController.text,
+                                Single_pole_MCB_installation: C
+                                        .Single_pole_MCB_installationController
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.Single_pole_MCB_installationController
+                                        .text,
+                                Sub_meter_installation: C
+                                        .Sub_meter_installationController
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.Sub_meter_installationController.text,
+                                Single_phase_phase_panel: C
+                                        .Single_phase_phase_panelController
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.Single_phase_phase_panelController.text,
+                                single_battery_inverter_installation: C
+                                        .single_battery_inverter_installation_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.single_battery_inverter_installation_Controller
+                                        .text,
+                                double_battery_inverter_installation: C
+                                        .double_battery_inverter_installation_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.double_battery_inverter_installation_Controller
+                                        .text,
+                                inverter_fuse_replacement: C
+                                        .inverter_fuse_replacement_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.inverter_fuse_replacement_Controller
+                                        .text,
+                                inverter_servicin:
+                                    C.inverter_servicin_Controller.text.isEmpty
+                                        ? ""
+                                        : C.inverter_servicin_Controller.text,
+                                stabilizer_installation: C
+                                        .stabilizer_installation_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.stabilizer_installation_Controller.text,
+                                TV_installation_up:
+                                    C.TV_installation_up_Controller.text.isEmpty
+                                        ? ""
+                                        : C.TV_installation_up_Controller.text,
+                                TV_installation_above: C
+                                        .TV_installation_above_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.TV_installation_above_Controller.text,
+                                TV_uninstallation:
+                                    C.TV_uninstallation_Controller.text.isEmpty
+                                        ? ""
+                                        : C.TV_uninstallation_Controller.text,
+                                mini_home_theatre_installation: C
+                                        .mini_home_theatre_installation_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.mini_home_theatre_installation_Controller
+                                        .text,
+                                room_heater_repair:
+                                    C.room_heater_repair_Controller.text.isEmpty
+                                        ? ""
+                                        : C.room_heater_repair_Controller.text,
+                                new_internal_wiring: C
+                                        .new_internal_wiring_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.new_internal_wiring_Controller.text,
+                                new_wiring_with_casing: C
+                                        .new_wiring_with_casing_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.new_wiring_with_casing_Controller.text,
+                                new_wiring_without_casing: C
+                                        .new_wiring_without_casing_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.new_wiring_without_casing_Controller
+                                        .text,
+                                doorbell_installation: C
+                                        .doorbell_installation_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.doorbell_installation_Controller.text,
+                                doorbell_replacement: C
+                                        .doorbell_replacement_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.doorbell_replacement_Controller.text,
                               ),
                             );
 
@@ -1236,7 +1540,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
                         buildTextFieldWidget(
                           controller: C.waste_pipe_leakage_Controller,
                           text: 'Waste Pipe Leakage (1 piece)',
-                          hintText: 'Pipe Leakage',
+                          hintText: 'Pipe Leakage (1 piece)',
                         ),
                         buildTextFieldWidget(
                           controller: C.waste_pipe_blockge_removal_Controller,
@@ -1257,6 +1561,199 @@ class _ServiceManagementState extends State<ServiceManagement> {
                           controller: C.kithen_title_gap_filling_Controller,
                           text: 'Kithen Tile Gap Filling',
                           hintText: 'Kithen Tile Gap Filling',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.mirror_fitting_installation_Contoller,
+                          text: 'Mirror fitting installation',
+                          hintText: 'Mirror fitting installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.shower_installation_wallmounted_Contorller,
+                          text: 'Shower installation (wall mounted/hand held)',
+                          hintText:
+                              'Shower installation (wall mounted/hand held)',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.shower_installation_celling_Contorller,
+                          text: 'Shower installation (celling mounted)	',
+                          hintText: 'Shower installation (celling mounted)	',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.drainage_pipe_blockage_removal_Controller,
+                          text: 'Drainage pipe blockage removal',
+                          hintText: 'Drainage pipe blockage removal',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.balcony_drain_blockage_removal_Controller,
+                          text: 'Balcony drain blockage removal',
+                          hintText: 'Balcony drain blockage removal',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.drain_cover_installation_Controller,
+                          text: 'Drain cover installation',
+                          hintText: 'Drain cover installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.flush_tank_repair_Controller,
+                          text: 'Flush tank repair ',
+                          hintText: 'Flush tank repair ',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.flush_tank_replacement_Controller,
+                          text: 'Flush tank replacement ',
+                          hintText: 'Flush tank replacement',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.flush_tank_repair_pvc_Controller,
+                          text: 'Flush tank repair PVC',
+                          hintText: 'Flush tank repair PVC',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.flush_tank_repair_conceal_in_wall_Controller,
+                          text: 'Flush tank repair Wall',
+                          hintText: 'Flush tank repair Wall',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.western_toilet_installation_Floor_Controller,
+                          text: 'Western toilet installation',
+                          hintText: 'Western toilet installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.western_toilet_repair_Controller,
+                          text: 'Western toilet repair',
+                          hintText: 'Western toilet repair',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C
+                              .floor_mountedwesterntoilet_replacement_Controller,
+                          text: 'Floor mounted western toilet replacement ',
+                          hintText: 'Floor mounted western toilet replacement',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.western_toilet_installation_Wall_Controller,
+                          text: 'Western toilet installation Wall',
+                          hintText: 'Western toilet installation Wall',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.wall_western_toilet_replacement_Controller,
+                          text: 'Wall western toilet replacement',
+                          hintText: 'Wall western toilet replacement',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.indian_toilet_installation_Controller,
+                          text: 'Indian toilet installation',
+                          hintText: 'Indian toilet installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.toilet_potblockage_removal_Controller,
+                          text: 'Toilet pot blockage removal',
+                          hintText: 'Toilet pot blockage removal',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.toilet_seat_cover_replacement_Controller,
+                          text: 'Toilet seat cover replacement',
+                          hintText: 'Toilet seat cover replacement',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.jetspray_installationrepair_Controller,
+                          text: 'Jet spray installation/repair',
+                          hintText: 'Jet spray installation/repair',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.Hot_coldwater_mixtures_repair_Controller,
+                          text: 'Hot & cold-water mixtures repair',
+                          hintText: 'Hot & cold-water mixtures repair',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.tap_repair_Controller,
+                          text: 'Tap repair',
+                          hintText: 'Tap repair',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.tap_replacement_Controller,
+                          text: 'Tap replacement',
+                          hintText: 'Tap replacement',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.Hot_coldwater_mixtures_installation_Controller,
+                          text: 'Hot & cold-water mixtures installation',
+                          hintText: 'Hot & cold-water mixtures installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.water_saving_nozzle_Controller,
+                          text: 'Water saving nozzle',
+                          hintText: 'Water saving nozzle',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.underground_ank_cleaning_Controller,
+                          text: 'Underground tank cleaning',
+                          hintText: 'Underground tank cleaning',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.pipeline_leakage_repair_Controller,
+                          text: 'Pipeline leakage repair',
+                          hintText: 'Pipeline leakage repair',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.water_meter_installation_Controller,
+                          text: 'Water meter installation',
+                          hintText: 'Water meter installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.motor_installation_Controller,
+                          text: 'Motor installation',
+                          hintText: 'Motor installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.motor_replacement_Controller,
+                          text: 'Motor replacement',
+                          hintText: 'Motor replacement',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.motorair_cavity_remova_Controller,
+                          text: 'Motor air cavity remove',
+                          hintText: 'Motor air cavity remove',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.connection_hose_installation_Controller,
+                          text: 'Connection hose installation',
+                          hintText: 'Connection hose installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller:
+                              C.washing_machine_inlet_installati_Controller,
+                          text: 'Washing machine inlet installation',
+                          hintText: 'Washing machine inlet installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.tap_filter_installation_Controller,
+                          text: 'Tap filter installation',
+                          hintText: 'Tap filter installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.shower_filter_installatio_Controller,
+                          text: 'Shower filter installation',
+                          hintText: 'Shower filter installation',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.washing_machine_filter_Controller,
+                          text: 'Washing machine filter',
+                          hintText: 'Washing machine filter',
+                        ),
+                        buildTextFieldWidget(
+                          controller: C.shower_filterwall_mounter_Controller,
+                          text: 'Shower filter- wall mounter',
+                          hintText: 'Shower filter- wall mounter',
                         ),
                         SizedBox(
                           height: 2.h,
@@ -1298,6 +1795,234 @@ class _ServiceManagementState extends State<ServiceManagement> {
                                         .isEmpty
                                     ? ""
                                     : C.kithen_title_gap_filling_Controller
+                                        .text,
+                                mirror_fitting_installation: C
+                                        .mirror_fitting_installation_Contoller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.mirror_fitting_installation_Contoller
+                                        .text,
+                                shower_installation_wallmounted: C
+                                        .shower_installation_wallmounted_Contorller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.shower_installation_wallmounted_Contorller
+                                        .text,
+                                shower_installation_celling: C
+                                        .shower_installation_celling_Contorller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.shower_installation_celling_Contorller
+                                        .text,
+                                drainage_pipe_blockage_removal: C
+                                        .drainage_pipe_blockage_removal_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.drainage_pipe_blockage_removal_Controller
+                                        .text,
+                                balcony_drain_blockage_removal: C
+                                        .balcony_drain_blockage_removal_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.balcony_drain_blockage_removal_Controller
+                                        .text,
+                                drain_cover_installation: C
+                                        .drain_cover_installation_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.drain_cover_installation_Controller
+                                        .text,
+                                flush_tank_repair:
+                                    C.flush_tank_repair_Controller.text.isEmpty
+                                        ? ""
+                                        : C.flush_tank_repair_Controller.text,
+                                flush_tank_replacement: C
+                                        .flush_tank_replacement_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.flush_tank_replacement_Controller.text,
+                                flush_tank_repair_pvc: C
+                                        .flush_tank_repair_pvc_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.flush_tank_repair_pvc_Controller.text,
+                                flush_tank_repair_conceal_in_wall: C
+                                        .flush_tank_repair_conceal_in_wall_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.flush_tank_repair_conceal_in_wall_Controller
+                                        .text,
+                                western_toilet_installation_Floor: C
+                                        .western_toilet_installation_Floor_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.western_toilet_installation_Floor_Controller
+                                        .text,
+                                western_toilet_repair: C
+                                        .western_toilet_repair_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.western_toilet_repair_Controller.text,
+                                floor_mountedwesterntoilet_replacement: C
+                                        .floor_mountedwesterntoilet_replacement_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.floor_mountedwesterntoilet_replacement_Controller
+                                        .text,
+                                western_toilet_installation_Wall: C
+                                        .western_toilet_installation_Wall_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.western_toilet_installation_Wall_Controller
+                                        .text,
+                                wall_western_toilet_replacement: C
+                                        .wall_western_toilet_replacement_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.wall_western_toilet_replacement_Controller
+                                        .text,
+                                indian_toilet_installation: C
+                                        .indian_toilet_installation_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.indian_toilet_installation_Controller
+                                        .text,
+                                toilet_potblockage_removal: C
+                                        .toilet_potblockage_removal_Controller
+                                        .text
+                                        .isEmpty
+                                    ? ""
+                                    : C.toilet_potblockage_removal_Controller
+                                        .text,
+                                toilet_seat_cover_replacement: C
+                                        .toilet_seat_cover_replacement_Controller
+                                        .text
+                                        .isEmpty
+                                    ? " "
+                                    : C.toilet_seat_cover_replacement_Controller
+                                        .text,
+                                jetspray_installationrepair: C
+                                        .jetspray_installationrepair_Controller
+                                        .text
+                                        .isEmpty
+                                    ? " "
+                                    : C.jetspray_installationrepair_Controller
+                                        .text,
+                                Hot_coldwater_mixtures_repair: C
+                                        .Hot_coldwater_mixtures_repair_Controller
+                                        .text
+                                        .isEmpty
+                                    ? " "
+                                    : C.Hot_coldwater_mixtures_repair_Controller
+                                        .text,
+                                tap_repair: C.tap_repair_Controller.text.isEmpty
+                                    ? " "
+                                    : C.tap_repair_Controller.text,
+                                tap_replacement:
+                                    C.tap_replacement_Controller.text.isEmpty
+                                        ? " "
+                                        : C.tap_replacement_Controller.text,
+                                Hot_coldwater_mixtures_installation: C
+                                        .Hot_coldwater_mixtures_installation_Controller
+                                        .text
+                                        .isEmpty
+                                    ? " "
+                                    : C.Hot_coldwater_mixtures_installation_Controller
+                                        .text,
+                                water_saving_nozzle: C
+                                        .water_saving_nozzle_Controller
+                                        .text
+                                        .isEmpty
+                                    ? " "
+                                    : C.water_saving_nozzle_Controller.text,
+                                underground_ank_cleaning: C
+                                        .underground_ank_cleaning_Controller
+                                        .text
+                                        .isEmpty
+                                    ? " "
+                                    : C.underground_ank_cleaning_Controller
+                                        .text,
+                                pipeline_leakage_repair: C
+                                        .pipeline_leakage_repair_Controller
+                                        .text
+                                        .isEmpty
+                                    ? " "
+                                    : C.pipeline_leakage_repair_Controller.text,
+                                water_meter_installation: C
+                                        .water_meter_installation_Controller
+                                        .text
+                                        .isEmpty
+                                    ? " "
+                                    : C.water_meter_installation_Controller
+                                        .text,
+                                motor_installation:
+                                    C.motor_installation_Controller.text.isEmpty
+                                        ? " "
+                                        : C.motor_installation_Controller.text,
+                                motor_replacement:
+                                    C.motor_replacement_Controller.text.isEmpty
+                                        ? " "
+                                        : C.motor_replacement_Controller.text,
+                                motorair_cavity_remova: C
+                                        .motorair_cavity_remova_Controller
+                                        .text
+                                        .isEmpty
+                                    ? " "
+                                    : C.motorair_cavity_remova_Controller.text,
+                                connection_hose_installation: C
+                                        .connection_hose_installation_Controller
+                                        .text
+                                        .isEmpty
+                                    ? " "
+                                    : C.connection_hose_installation_Controller
+                                        .text,
+                                washing_machine_inlet_installati: C
+                                        .washing_machine_inlet_installati_Controller
+                                        .text
+                                        .isEmpty
+                                    ? " "
+                                    : C.washing_machine_inlet_installati_Controller
+                                        .text,
+                                tap_filter_installation: C
+                                        .tap_filter_installation_Controller
+                                        .text
+                                        .isEmpty
+                                    ? " "
+                                    : C.tap_filter_installation_Controller.text,
+                                shower_filter_installatio: C
+                                        .shower_filter_installatio_Controller
+                                        .text
+                                        .isEmpty
+                                    ? " "
+                                    : C.shower_filter_installatio_Controller
+                                        .text,
+                                washing_machine_filter: C
+                                        .washing_machine_filter_Controller
+                                        .text
+                                        .isEmpty
+                                    ? " "
+                                    : C.washing_machine_filter_Controller.text,
+                                shower_filterwall_mounter: C
+                                        .shower_filterwall_mounter_Controller
+                                        .text
+                                        .isEmpty
+                                    ? " "
+                                    : C.shower_filterwall_mounter_Controller
                                         .text,
                               ),
                             );
