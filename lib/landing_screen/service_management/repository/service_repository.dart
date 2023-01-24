@@ -94,8 +94,8 @@ class ServiceRepository {
     cookService.id = _serviceDocs.id;
 
     await _firebaseFirestore
-        .collection(FirebasePath.servicePrice)
-        .doc()
+        // .collection(FirebasePath.servicePrice)
+        // .doc()
         .collection(FirebasePath.cook)
         .doc(_serviceDocs.id)
         .set(cookService.toMap());
@@ -116,8 +116,8 @@ class ServiceRepository {
     driverService.id = _serviceDocs.id;
 
     await _firebaseFirestore
-        .collection(FirebasePath.servicePrice)
-        .doc()
+        // .collection(FirebasePath.servicePrice)
+        // .doc()
         .collection(FirebasePath.driver)
         .doc(_serviceDocs.id)
         .set(driverService.toMap());
@@ -138,8 +138,8 @@ class ServiceRepository {
     electricianService.id = _serviceDocs.id;
 
     await _firebaseFirestore
-        .collection(FirebasePath.servicePrice)
-        .doc()
+        // .collection(FirebasePath.servicePrice)
+        // .doc()
         .collection(FirebasePath.electrician)
         .doc(electricianService.id)
         .set(electricianService.toMap());
@@ -160,8 +160,8 @@ class ServiceRepository {
     plumberService.id = _serviceDocs.id;
 
     await _firebaseFirestore
-        .collection(FirebasePath.servicePrice)
-        .doc()
+        // .collection(FirebasePath.servicePrice)
+        // .doc()
         .collection(FirebasePath.plumber)
         .doc(plumberService.id)
         .set(plumberService.toMap());
