@@ -3400,7 +3400,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const MaidDetailScreen(),
+            builder: (context) => MaidDetailScreen(),
           ),
         );
         break;
@@ -3408,7 +3408,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const CookDetailsScreen(),
+            builder: (context) => CookDetailsScreen(),
           ),
         );
         break;
@@ -3432,7 +3432,7 @@ class _ServiceManagementState extends State<ServiceManagement> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const PlumberDetailsScreen(),
+            builder: (context) => PlumberDetailsScreen(),
           ),
         );
         break;

@@ -7,7 +7,7 @@ import '../../../utility/ui_color.dart';
 import '../widgets/service_management_widget.dart';
 
 class PlumberDetailsScreen extends StatelessWidget {
-  const PlumberDetailsScreen({Key? key}) : super(key: key);
+  PlumberDetailsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,62 +47,180 @@ class PlumberDetailsScreen extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 285,
-              crossAxisSpacing: 15,
-              mainAxisExtent: 50,
-              mainAxisSpacing: 15,
-            ),
-            itemCount: 10,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(top: 10.h, left: 6.w, right: 6.w),
-                child: Container(
-                  height: 50.h,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 2.w,
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: Text(
-                            'Shower filter wall mounter',
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 2.h),
-                            child: buildTextFieldWidget1(
-                              hintText: 'Price',
-                              controller: TextEditingController(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+          child: SingleChildScrollView(
+            child: Wrap(
+              direction: Axis.horizontal,
+              textDirection: TextDirection.ltr,
+              spacing: 8.0,
+              runSpacing: 8.0,
+              children: [
+                plumberCard(
+                  serviceName: 'Waste pipe leakage (1 piece)',
+                  addOnTap: () {},
                 ),
-              );
-            },
+                plumberCard(
+                  serviceName: 'Wash basin blockage removal',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Wash basin installation',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Bathroom tile gap filling',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Kitchen tile gap filling',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Mirror fitting installation',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Shower installation (wall mounted/hand held)',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Shower installation (celling mounted)',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Drainage pipe blockage removal',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Balcony drain blockage removal',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Drain cover installation',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Flush tank repair (external ceramic)',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Flush tank replacement',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Flush tank repair (external PVC)',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Flush tank repair (conceal in wall)',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Western toilet installation (floor mounted)',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Western toilet repair',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Floor mounted western toilet replacement',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Western toilet installation (wall mounted)',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Wall western toilet replacement',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Indian toilet installation',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Toilet pot blockage removal',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Toilet seat cover replacement',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Jet spray installation/repair',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Hot & cold-water mixtures repair',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Tap repair',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Tap replacement',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Hot & cold-water mixtures installation',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Water saving nozzle',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Underground tank cleaning (up to 3000L)',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Pipeline leakage repair',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Water meter installation',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Motor installation (1 unit up to 1HP)',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Motor replacement (1 unit up to 1HP)',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Motor air cavity removal (1 unit up to 1HP)',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Connection hose installation (1 unit)',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Washing machine inlet installation',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Tap filter installation',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Shower filter installation',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Washing machine filter',
+                  addOnTap: () {},
+                ),
+                plumberCard(
+                  serviceName: 'Shower filter- wall mounter',
+                  addOnTap: () {},
+                ),
+              ],
+            ),
           ),
-        ),
-        SizedBox(
-          height: 2.h,
-        ),
-        _addButtons(
-          onPressed: () async {},
         ),
         SizedBox(
           height: 10.h,
@@ -111,27 +229,91 @@ class PlumberDetailsScreen extends StatelessWidget {
     );
   }
 
+  Widget plumberCard({
+    required String serviceName,
+    required void Function()? addOnTap,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: 250.w,
+        height: 155.h,
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Column(
+          children: [
+            Card(
+              color: Colors.white.withOpacity(0.3),
+              child: SizedBox(
+                width: double.infinity,
+                height: 40.h,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 2.w,
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      serviceName,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14.sp,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 2.w,
+                vertical: 2.h,
+              ),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: buildTextFieldWidget1(
+                  controller: TextEditingController(),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 8.h,
+            ),
+            _addButtons(
+              onPressed: addOnTap,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget _addButtons({
     VoidCallback? onPressed,
   }) {
-    return ElevatedButton(
-      child: const Text('Add'),
-      style: ButtonStyle(
-        padding: MaterialStateProperty.all(EdgeInsets.symmetric(
-          horizontal: 80.w,
-          vertical: 10.h,
-        )),
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 4.w),
+      child: SizedBox(
+        width: double.infinity,
+        height: 40.h,
+        child: ElevatedButton(
+          child: const Text('Add'),
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+            backgroundColor: MaterialStateProperty.all(UiColors.themeColor),
+            foregroundColor:
+                MaterialStateProperty.all(UiColors.logInButtonForeground),
+            textStyle: MaterialStateProperty.all(ServiceManagement.textStyle),
           ),
+          onPressed: onPressed,
         ),
-        backgroundColor: MaterialStateProperty.all(UiColors.themeColor),
-        foregroundColor:
-            MaterialStateProperty.all(UiColors.logInButtonForeground),
-        textStyle: MaterialStateProperty.all(ServiceManagement.textStyle),
       ),
-      onPressed: onPressed,
     );
   }
 
@@ -141,8 +323,7 @@ class PlumberDetailsScreen extends StatelessWidget {
     String? hintText,
   }) {
     return SizedBox(
-      width: 80.w,
-      height: 60,
+      height: 40.h,
       child: TextFieldWidget(
         controller: controller!,
         labelText: text ?? "",

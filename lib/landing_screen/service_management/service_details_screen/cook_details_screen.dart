@@ -5,9 +5,23 @@ import '../../../tools/responsive_handler.dart';
 import '../../../utility/text_field_widget.dart';
 import '../../../utility/ui_color.dart';
 import '../widgets/service_management_widget.dart';
+import 'maid_details_screen.dart';
 
-class CookDetailsScreen extends StatelessWidget {
-  const CookDetailsScreen({Key? key}) : super(key: key);
+class CookDetailsScreen extends StatefulWidget {
+  CookDetailsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<CookDetailsScreen> createState() => _CookDetailsScreenState();
+}
+
+class _CookDetailsScreenState extends State<CookDetailsScreen> {
+  Object? gender;
+
+  Object? workSpecification;
+
+  Object? preferenceTiming;
+
+  Lst lists = Lst();
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +33,7 @@ class CookDetailsScreen extends StatelessWidget {
     );
   }
 
-  Column buildColumn(BuildContext context) {
+  Widget buildColumn(BuildContext context) {
     return Column(
       children: [
         Container(
@@ -37,7 +51,7 @@ class CookDetailsScreen extends StatelessWidget {
                 width: 10,
               ),
               Text(
-                'Cook Service',
+                'Maid Service',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 14.sp,
@@ -46,92 +60,235 @@ class CookDetailsScreen extends StatelessWidget {
             ],
           ),
         ),
-        Expanded(
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 285,
-              crossAxisSpacing: 15,
-              mainAxisExtent: 50,
-              mainAxisSpacing: 15,
-            ),
-            itemCount: 10,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(top: 10.h, left: 6.w, right: 6.w),
-                child: Container(
-                  height: 50.h,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
+        Row(
+          children: [
+            Expanded(
+              child: Card(
+                color: Colors.white.withOpacity(0.3),
+                child: SizedBox(
+                  height: 40.h,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 2.w,
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
+                    padding: EdgeInsets.symmetric(horizontal: 2.w),
+                    child: DropdownButton(
+                      underline: const SizedBox(),
+                      isExpanded: true,
+                      iconEnabledColor: Colors.white,
+                      hint: const Text(
+                        'Gender Preferences',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      value: gender,
+                      items: lists.Work_Spe_lst.map((Object? items) {
+                        return DropdownMenuItem(
+                          value: items,
                           child: Text(
-                            'Shower filter wall mounter',
-                            style: TextStyle(
-                              fontSize: 12.sp,
+                            items.toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 2.h),
-                            child: buildTextFieldWidget1(
-                              hintText: 'Price',
-                              controller: TextEditingController(),
-                            ),
-                          ),
-                        ),
-                      ],
+                        );
+                      }).toList(),
+                      onChanged: (v) {
+                        setState(() {
+                          gender = v;
+                        });
+                      },
                     ),
                   ),
                 ),
-              );
-            },
-          ),
-        ),
-        SizedBox(
-          height: 2.h,
-        ),
-        _addButtons(
-          onPressed: () async {},
+              ),
+            ),
+            Expanded(
+              child: Card(
+                color: Colors.white.withOpacity(0.3),
+                child: SizedBox(
+                  height: 40.h,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 2.w),
+                    child: DropdownButton(
+                      underline: const SizedBox(),
+                      isExpanded: true,
+                      iconEnabledColor: Colors.white,
+                      hint: const Text(
+                        'Preference Timing',
+                        style: TextStyle(color: Colors.grey),
+                      ),
+                      value: preferenceTiming,
+                      items: lists.pew_Timing_lst.map((Object? items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Text(
+                            items.toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (v) {
+                        setState(() {
+                          preferenceTiming = v;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         SizedBox(
           height: 10.h,
         ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Wrap(
+              direction: Axis.horizontal,
+              textDirection: TextDirection.ltr,
+              spacing: 10.h,
+              runSpacing: 8.0,
+              children: [
+                cookCard(
+                  serviceName: '1 Person - 1 Time',
+                  addOnTap: () {},
+                ),
+                cookCard(
+                  serviceName: '1 Person - 2 Time',
+                  addOnTap: () {},
+                ),
+                cookCard(
+                  serviceName: '2 Person - 1 Time',
+                  addOnTap: () {},
+                ),
+                cookCard(
+                  serviceName: '2 Person - 2 Time',
+                  addOnTap: () {},
+                ),
+                cookCard(
+                  serviceName: '3 Person - 1 Time',
+                  addOnTap: () {},
+                ),
+                cookCard(
+                  serviceName: '3 Person - 2 Time',
+                  addOnTap: () {},
+                ),
+                cookCard(
+                  serviceName: '4 Person - 1 Time',
+                  addOnTap: () {},
+                ),
+                cookCard(
+                  serviceName: '4 Person - 2 Time',
+                  addOnTap: () {},
+                ),
+                cookCard(
+                  serviceName: '5 Person - 1 Time',
+                  addOnTap: () {},
+                ),
+                cookCard(
+                  serviceName: '5 Person - 1 Time',
+                  addOnTap: () {},
+                ),
+                cookCard(
+                  serviceName: '6 Person - 1 Time',
+                  addOnTap: () {},
+                ),
+                cookCard(
+                  serviceName: '6 Person - 2 Time',
+                  addOnTap: () {},
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
+    );
+  }
+
+  Widget cookCard({
+    required String serviceName,
+    required void Function()? addOnTap,
+  }) {
+    return Container(
+      width: 250.w,
+      height: 155.h,
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Column(
+        children: [
+          Card(
+            color: Colors.white.withOpacity(0.3),
+            child: SizedBox(
+              width: double.infinity,
+              height: 40.h,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 2.w,
+                ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    serviceName,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14.sp,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 2.w,
+              vertical: 2.h,
+            ),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: buildTextFieldWidget1(
+                controller: TextEditingController(),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 8.h,
+          ),
+          _addButtons(
+            onPressed: addOnTap,
+          ),
+        ],
+      ),
     );
   }
 
   Widget _addButtons({
     VoidCallback? onPressed,
   }) {
-    return ElevatedButton(
-      child: const Text('Add'),
-      style: ButtonStyle(
-        padding: MaterialStateProperty.all(EdgeInsets.symmetric(
-          horizontal: 80.w,
-          vertical: 10.h,
-        )),
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 4.w),
+      child: SizedBox(
+        width: double.infinity,
+        height: 40.h,
+        child: ElevatedButton(
+          child: const Text('Add'),
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+            backgroundColor: MaterialStateProperty.all(UiColors.themeColor),
+            foregroundColor:
+                MaterialStateProperty.all(UiColors.logInButtonForeground),
+            textStyle: MaterialStateProperty.all(ServiceManagement.textStyle),
           ),
+          onPressed: onPressed,
         ),
-        backgroundColor: MaterialStateProperty.all(UiColors.themeColor),
-        foregroundColor:
-            MaterialStateProperty.all(UiColors.logInButtonForeground),
-        textStyle: MaterialStateProperty.all(ServiceManagement.textStyle),
       ),
-      onPressed: onPressed,
     );
   }
 
@@ -141,12 +298,11 @@ class CookDetailsScreen extends StatelessWidget {
     String? hintText,
   }) {
     return SizedBox(
-      width: 80.w,
-      height: 60,
+      height: 40.h,
       child: TextFieldWidget(
         controller: controller!,
         labelText: text ?? "",
-        hintText: hintText,
+        hintText: 'Price',
         textInputAction: TextInputAction.next,
         keyboardType: TextInputType.text,
         validator: (value) {

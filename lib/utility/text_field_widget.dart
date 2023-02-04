@@ -15,6 +15,7 @@ class TextFieldWidget extends StatelessWidget {
   final bool obscureText;
   final String? hintText;
   final String? Function(String?)? validator;
+
   const TextFieldWidget({
     Key? key,
     required this.controller,
@@ -49,50 +50,49 @@ class TextFieldWidget extends StatelessWidget {
       // fontSize: ResponsiveWidget.isMobile(context) ? 12 : 14,
       fontSize: 12.sp,
     ));
-    return TextFormField(
-      key: ValueKey(text),
-      autofillHints: autofillHints,
-      keyboardType: keyboardType,
-      textInputAction: textInputAction,
-      textCapitalization: TextCapitalization.sentences,
-      style: _textFieldContentStyle,
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: labelText,
-        contentPadding: EdgeInsets.symmetric(
-          // horizontal: _deviceSize.width *
-          //     (ResponsiveWidget.isMobile(context) ? 0.04 : 0.02),
-          vertical: 10.h,
-          horizontal: 20.w,
-        ),
-        hintText: hintText,
-        hintStyle: _textFieldHintStyle,
-        suffixIcon: suffixIcon,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        focusColor: UiColors.themeColor,
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: UiColors.themeColor, width: 2.0.w),
-          borderRadius: BorderRadius.circular(10.r),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: controller.text.isEmpty
-                ? UiColors.foregroundColor
-                : UiColors.themeColor,
-            width: 2.w,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 2.w),
+      child: TextFormField(
+        key: ValueKey(text),
+        autofillHints: autofillHints,
+        keyboardType: keyboardType,
+        textInputAction: textInputAction,
+        textCapitalization: TextCapitalization.sentences,
+        style: _textFieldContentStyle,
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: labelText,
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 10.h,
+            horizontal: 20.w,
           ),
-          borderRadius: BorderRadius.circular(10.r),
+          hintText: hintText,
+          filled: true,
+          fillColor: Colors.white.withOpacity(0.3),
+          hintStyle: _textFieldHintStyle,
+          suffixIcon: suffixIcon,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide.none,
+          ),
+          focusColor: UiColors.themeColor,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide.none,
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide.none,
+          ),
         ),
+        cursorColor: Colors.white,
+        //it is used to hide the character during password entry.
+        obscureText: obscureText,
+        validator: validator,
+        onSaved: (value) {
+          controller.text = value!.trim();
+        },
       ),
-      cursorColor: Colors.white,
-      //it is used to hide the character during password entry.
-      obscureText: obscureText,
-      validator: validator,
-      onSaved: (value) {
-        controller.text = value!.trim();
-      },
     );
   }
 }

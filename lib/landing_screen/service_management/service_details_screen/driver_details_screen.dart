@@ -19,7 +19,7 @@ class DriverDetailsScreen extends StatelessWidget {
     );
   }
 
-  Column buildColumn(BuildContext context) {
+  Widget buildColumn(BuildContext context) {
     return Column(
       children: [
         Container(
@@ -46,92 +46,127 @@ class DriverDetailsScreen extends StatelessWidget {
             ],
           ),
         ),
-        Expanded(
-          child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 285,
-              crossAxisSpacing: 15,
-              mainAxisExtent: 50,
-              mainAxisSpacing: 15,
-            ),
-            itemCount: 10,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(top: 10.h, left: 6.w, right: 6.w),
-                child: Container(
-                  height: 50.h,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 2.w,
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: Text(
-                            'Shower filter wall mounter',
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 2.h),
-                            child: buildTextFieldWidget1(
-                              hintText: 'Price',
-                              controller: TextEditingController(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-        SizedBox(
-          height: 2.h,
-        ),
-        _addButtons(
-          onPressed: () async {},
-        ),
         SizedBox(
           height: 10.h,
         ),
+        Expanded(
+          child: SingleChildScrollView(
+            child: Wrap(
+              direction: Axis.horizontal,
+              textDirection: TextDirection.ltr,
+              spacing: 10.h,
+              runSpacing: 8.0,
+              children: [
+                driverCard(
+                  serviceName: 'Small',
+                  addOnTap: () {},
+                ),
+                driverCard(
+                  serviceName: 'Medium/Sedan',
+                  addOnTap: () {},
+                ),
+                driverCard(
+                  serviceName: 'Compact SUV',
+                  addOnTap: () {},
+                ),
+                driverCard(
+                  serviceName: 'SUV 7Seater',
+                  addOnTap: () {},
+                ),
+                driverCard(
+                  serviceName: 'Luxury Cars',
+                  addOnTap: () {},
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
+    );
+  }
+
+  Widget driverCard({
+    required String serviceName,
+    required void Function()? addOnTap,
+  }) {
+    return Container(
+      width: 250.w,
+      height: 155.h,
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Column(
+        children: [
+          Card(
+            color: Colors.white.withOpacity(0.3),
+            child: SizedBox(
+              width: double.infinity,
+              height: 40.h,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 2.w,
+                ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    serviceName,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14.sp,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 2.w,
+              vertical: 2.h,
+            ),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: buildTextFieldWidget1(
+                controller: TextEditingController(),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 8.h,
+          ),
+          _addButtons(
+            onPressed: addOnTap,
+          ),
+        ],
+      ),
     );
   }
 
   Widget _addButtons({
     VoidCallback? onPressed,
   }) {
-    return ElevatedButton(
-      child: const Text('Add'),
-      style: ButtonStyle(
-        padding: MaterialStateProperty.all(EdgeInsets.symmetric(
-          horizontal: 80.w,
-          vertical: 10.h,
-        )),
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 4.w),
+      child: SizedBox(
+        width: double.infinity,
+        height: 40.h,
+        child: ElevatedButton(
+          child: const Text('Add'),
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              ),
+            ),
+            backgroundColor: MaterialStateProperty.all(UiColors.themeColor),
+            foregroundColor:
+                MaterialStateProperty.all(UiColors.logInButtonForeground),
+            textStyle: MaterialStateProperty.all(ServiceManagement.textStyle),
           ),
+          onPressed: onPressed,
         ),
-        backgroundColor: MaterialStateProperty.all(UiColors.themeColor),
-        foregroundColor:
-            MaterialStateProperty.all(UiColors.logInButtonForeground),
-        textStyle: MaterialStateProperty.all(ServiceManagement.textStyle),
       ),
-      onPressed: onPressed,
     );
   }
 
@@ -141,12 +176,11 @@ class DriverDetailsScreen extends StatelessWidget {
     String? hintText,
   }) {
     return SizedBox(
-      width: 80.w,
-      height: 60,
+      height: 40.h,
       child: TextFieldWidget(
         controller: controller!,
         labelText: text ?? "",
-        hintText: hintText,
+        hintText: 'Price',
         textInputAction: TextInputAction.next,
         keyboardType: TextInputType.text,
         validator: (value) {
